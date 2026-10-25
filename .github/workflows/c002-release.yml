@@ -1,0 +1,314 @@
+name: Verify final C002 main and publish annotated release
+'on':
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: c002-v1.0-leanc001-publication
+  cancel-in-progress: false
+defaults:
+  run:
+    shell: bash
+env:
+  RELEASE_TAG: c002-v1.0-leanc001
+  READER_PDF: manuscript/C002_READABLE.pdf
+  RELEASE_NOTES: docs/C002_RELEASE_NOTES.md
+  PYTHONDONTWRITEBYTECODE: '1'
+  LEAN_NUM_THREADS: '1'
+jobs:
+  verify-and-release:
+    if: github.repository == 'LeoLam233/kerr-newman-uhp-mode-exclusion' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - name: Check out the exact main event commit without persisted credentials
+        run: |
+          set -Eeuo pipefail
+          git init -q .
+          git config core.autocrlf false
+          git remote add origin "https://github.com/${GITHUB_REPOSITORY}.git"
+          git fetch --no-tags --depth=1 origin "$GITHUB_SHA"
+          git checkout --detach FETCH_HEAD
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test -f "$READER_PDF"
+          test -f "$RELEASE_NOTES"
+          test ! -e .lake/build
+
+      - name: Install the exact official Linux Lean 4.34.1 runtime
+        run: |
+          set -Eeuo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y zstd qpdf poppler-utils
+          curl --fail --location --retry 4 --output "$RUNNER_TEMP/lean.tar.zst" \
+            https://github.com/leanprover/lean4/releases/download/v4.34.1/lean-4.34.1-linux.tar.zst
+          printf '%s  %s\n' \
+            47bf4bbd78f70c2e9670598ab7124d92b6efb7330ff33e5fbb4030f6fd72e4e4 \
+            "$RUNNER_TEMP/lean.tar.zst" | sha256sum --check --strict
+          tar --use-compress-program=unzstd -xf "$RUNNER_TEMP/lean.tar.zst" -C "$RUNNER_TEMP"
+          rm -- "$RUNNER_TEMP/lean.tar.zst"
+          printf '%s\n' "$RUNNER_TEMP/lean-4.34.1-linux/bin" >> "$GITHUB_PATH"
+
+      - name: Native gates, exact pins, controls, import probes and portable assets
+        run: |
+          set -Eeuo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          from datetime import datetime, timezone
+          import hashlib, importlib.util, json, os, re, shutil, subprocess, time, zipfile
+
+          root=Path.cwd(); tmp=Path(os.environ['RUNNER_TEMP'])/'c002'
+          raw=tmp/'native'; raw.mkdir(parents=True,exist_ok=False)
+          assets=tmp/'assets'; assets.mkdir()
+          bindir=Path(shutil.which('lean')).parent
+          env=os.environ.copy()
+          for key in ('LEAN_PATH','LEAN_SRC_PATH','LEAN_SYSROOT','LAKE_HOME','LAKE_PKG_URL_MAP'):
+              env.pop(key,None)
+          # Bound concurrent Lean work on the standard 16 GiB public runner.
+          if hasattr(os,'sched_getaffinity'):
+              os.sched_setaffinity(0,sorted(os.sched_getaffinity(0))[:2])
+          def sha(p):
+              h=hashlib.sha256()
+              with Path(p).open('rb') as f:
+                  for b in iter(lambda:f.read(1024*1024),b''): h.update(b)
+              return h.hexdigest()
+          def dump(p,obj): p.write_text(json.dumps(obj,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+          state={'all_pass':False,'commit':os.environ['GITHUB_SHA'],
+                 'git_tree_sha':subprocess.check_output(['git','rev-parse','HEAD^{tree}'],text=True).strip(),
+                 'evidence_scope':{'fresh':'All native stages in this run execute on the final merged main commit.','reused':'Completed mathematical/Lean audits and the initial 94941a2c publication receipts are historical source-correspondence evidence; their execution is not counted as fresh here.'},
+                 'run_url':f"https://github.com/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{os.environ['GITHUB_RUN_ID']}",
+                 'started_utc':datetime.now(timezone.utc).isoformat(),'stages':[],
+                 'mathematical_audit_restarted':False,'project_objects_before':0}
+          def stage(name,argv,cwd=root,allowed=(0,)):
+              print('START '+name,flush=True)
+              started=time.monotonic(); out=raw/(name+'.stdout.log'); err=raw/(name+'.stderr.log')
+              with out.open('wb') as o,err.open('wb') as e:
+                  r=subprocess.run([str(a) for a in argv],cwd=cwd,env=env,stdout=o,stderr=e,timeout=5400)
+              rec={'name':name,'argv':[str(a) for a in argv],'exit_code':r.returncode,
+                   'seconds':time.monotonic()-started,'stdout_sha256':sha(out),'stderr_sha256':sha(err)}
+              state['stages'].append(rec);dump(raw/(name+'.json'),rec);dump(raw/'summary.json',state)
+              print(name,'exit',r.returncode,flush=True)
+              if r.returncode not in allowed: raise RuntimeError(name+' failed')
+              return out.read_text(encoding='utf-8').strip()
+          def load_module(name,path):
+              spec=importlib.util.spec_from_file_location(name,path)
+              mod=importlib.util.module_from_spec(spec);spec.loader.exec_module(mod);return mod
+          try:
+              assert not list(root.rglob('*.olean')) and not (root/'.lake/build').exists()
+              assert (root/'lean-toolchain').read_text().strip()=='leanprover/lean4:v4.34.1'
+              state['runtime_hashes']={n:sha(bindir/n) for n in ('lean','lake','leanchecker')}
+              assert state['runtime_hashes']==json.loads((root/'provenance/ORIGINAL_RUNTIME_MANIFEST.json').read_text())
+              state['lean_version']=stage('lean_version',[bindir/'lean','--version'])
+              state['lake_version']=stage('lake_version',[bindir/'lake','--version'])
+              stage('release_delta',['python3','release_checks/verify_release.py','.'])
+              stage('diagnostic_regressions',['python3','release_checks/test_runner_diagnostics.py'])
+              stage('readable_editorial_preservation',['python3','release_checks/verify_readable_edition.py','.'])
+              stage('readable_pdf_structure',['qpdf','--check',os.environ['READER_PDF']])
+              state['readable_pdf_info']=stage('readable_pdf_info',['pdfinfo',os.environ['READER_PDF']])
+              assert re.search(r'Pages:\s+20\b',state['readable_pdf_info'])
+              state['readable_pdf_sha256']=sha(root/os.environ['READER_PDF'])
+              identity=load_module('identity',root/'validation/source_identity.py')
+              before=identity.snapshot(root);dump(raw/'source_before.json',before)
+              assert before['source_id']==json.loads((root/'release_checks/RELEASE_DELTA.json').read_text())['release_source_id']
+              state['publication_source_id']=before['source_id']
+              pins=json.loads((root/'lake-manifest.json').read_text())
+              dependencies=[]
+              for pin in pins['packages']:
+                  assert pin['type']=='git' and re.fullmatch('[0-9a-f]{40}',pin['rev'])
+                  dep=root/pins.get('packagesDir','.lake/packages')/pin['name'];dep.mkdir(parents=True)
+                  stage('dep_'+pin['name']+'_init',['git','init','-q'],dep)
+                  stage('dep_'+pin['name']+'_remote',['git','remote','add','origin',pin['url']],dep)
+                  stage('dep_'+pin['name']+'_fetch',['git','fetch','--no-tags','--depth=1','origin',pin['rev']],dep)
+                  stage('dep_'+pin['name']+'_checkout',['git','checkout','--detach','FETCH_HEAD'],dep)
+                  head=stage('dep_'+pin['name']+'_head',['git','rev-parse','HEAD'],dep)
+                  assert head==pin['rev']
+                  dependencies.append({'name':pin['name'],'rev':head,'url':pin['url']})
+              # Target all 113 direct external Mathlib imports, plus their
+              # transitive dependencies, rather than fetching all of Mathlib.
+              imports=set()
+              scientific=[root/'KN.lean',root/'AuditKN.lean',*(root/'KN').rglob('*.lean'),*(root/'validation').rglob('*.lean')]
+              for p in scientific:
+                  for line in p.read_text(encoding='utf-8').splitlines():
+                      if line.startswith('import '):
+                          imports.update(x for x in line[7:].split() if x.startswith('Mathlib.'))
+              assert imports
+              stage('mathlib_pinned_cache',[bindir/'lake','exe','cache','get',*sorted(imports)])
+              assert not (root/'.lake/build/lib/lean/KN').exists()
+              for dep in dependencies:
+                  path=root/'.lake/packages'/dep['name']
+                  assert not list((path/'.lake/build/lib/lean').glob('KN*'))
+                  assert subprocess.check_output(['git','rev-parse','HEAD'],cwd=path,text=True).strip()==dep['rev']
+                  assert not subprocess.check_output(['git','status','--porcelain','--untracked-files=no'],cwd=path,text=True).strip()
+                  cache=path/'.lake/build/lib/lean'
+                  dep['cache_hashes']={p.relative_to(cache).as_posix():sha(p) for p in sorted(cache.rglob('*')) if p.is_file()}
+              dump(raw/'dependencies_before.json',dependencies)
+              stage('native_build',[bindir/'lake','build','KN','AuditKN'])
+              stage('strict_audit',[bindir/'lake','env','lean','-j1','-DwarningAsError=true','AuditKN.lean'])
+              stage('archived_root_comparison',['python3','release_checks/compare_archived_roots.py',raw/'strict_audit.stdout.log'])
+              stage('fresh_kernel_replay',[bindir/'lake','env','leanchecker','--fresh','--verbose','KN'])
+              stage('corrected_author_controls',['python3','validation/run_controls.py','--project',root,'--lean-bin-dir',bindir,'--results',raw/'controls'])
+              controls=json.loads((raw/'controls/summary.json').read_text())
+              base=json.loads((root/'release_checks/intended_control_baseline.json').read_text())
+              validator=load_module('diagnostics',root/'release_checks/validate_control_diagnostics.py')
+              records={r['source']:r for r in controls['cases']}; detail=[]
+              assert len(records)==len(controls['cases'])==len(base['cases'])==30
+              assert set(records)=={b['source'] for b in base['cases']}
+              for b in base['cases']:
+                  c=records[b['source']];log=raw/'controls'/c['log']
+                  assert sha(root/b['source'])==b['source_sha256']==c['source_sha256']
+                  assert sha(log)==c['log_sha256'] and b['expected']==c['expected']
+                  issues=validator.judge(b,c['exit_code'],log.read_text(encoding='utf-8'))
+                  assert not issues,(b['source'],issues)
+                  detail.append({'source':b['source'],'exit_code':c['exit_code'],'passed':True,'log_sha256':sha(log)})
+              assert sum(c['expected']=='pass' for c in records.values())==5
+              dump(raw/'independent_control_diagnostics.json',{'all_pass':True,'archived_baseline_sha256':sha(root/'release_checks/intended_control_baseline.json'),'cases':detail})
+              # Run the unchanged aggregate runner against actual absent/corrupt objects
+              # in two separate probe trees, with no edits to production objects.
+              probes=[]
+              for variant in ('missing_object','corrupt_object'):
+                  probe=tmp/('probe_'+variant);probe.mkdir()
+                  for name in ('lean-toolchain','lakefile.toml','lake-manifest.json'):shutil.copy2(root/name,probe/name)
+                  (probe/'.lake').mkdir();(probe/'.lake/packages').symlink_to(root/'.lake/packages',target_is_directory=True)
+                  fixture=probe/'validation/controls_angular/RejectConjugation.lean';fixture.parent.mkdir(parents=True)
+                  shutil.copy2(root/'validation/controls_angular/RejectConjugation.lean',fixture)
+                  obj=probe/'.lake/build/lib/lean/KN/Angular/PrimalEigenvector.olean';obj.parent.mkdir(parents=True)
+                  if variant=='corrupt_object':obj.write_bytes(b'intentionally-invalid-native-object\n')
+                  results=raw/variant
+                  stage(variant,['python3',root/'validation/run_controls.py','--project',probe,'--lean-bin-dir',bindir,'--results',results],probe,allowed=(1,))
+                  s=json.loads((results/'summary.json').read_text());assert len(s['cases'])==1
+                  c=s['cases'][0];diagnostic=(results/c['log']).read_text()
+                  assert not s['all_pass'] and not c['passed'] and c['exit_code']==1
+                  assert ('failed to read file' in diagnostic.lower() if variant=='corrupt_object' else 'object file' in diagnostic.lower())
+                  probes.append({'variant':variant,'runner_exit_code':1,'lean_exit_code':1,'incorrectly_accepted':False,'native_diagnostic':diagnostic})
+              dump(raw/'import_failure_probes.json',{'all_pass':True,'cases':probes})
+              after=identity.snapshot(root);dump(raw/'source_after.json',after);assert before==after
+              assert not subprocess.check_output(['git','status','--porcelain','--untracked-files=no'],text=True).strip()
+              for dep in dependencies:
+                  p=root/'.lake/packages'/dep['name']
+                  assert subprocess.check_output(['git','rev-parse','HEAD'],cwd=p,text=True).strip()==dep['rev']
+                  assert not subprocess.check_output(['git','status','--porcelain','--untracked-files=no'],cwd=p,text=True).strip()
+              assert len(dependencies)==9
+              state.update(all_pass=True,scientific_source_unchanged=True,dependency_sources_unchanged=True,
+                           dependencies_verified=len(dependencies),controls={'total':30,'accepts':5,'intended_rejects':25})
+          except Exception as e:
+              state['failure']=str(e);raise
+          finally:
+              state['finished_utc']=datetime.now(timezone.utc).isoformat();dump(raw/'summary.json',state)
+          assert state['all_pass']
+          # No post-verification commit: assets bind the exact final event commit.
+          def redact(s):
+              for a,b in sorted([(str(root),'<publication-tree>'),(str(tmp),'<verification-workspace>'),(os.environ['RUNNER_TEMP'],'<runner-temp>'),(str(Path.home()),'<runner-home>')],key=lambda x:-len(x[0])):s=s.replace(a,b)
+              return s
+          portable=tmp/'portable';portable.mkdir();hashes={}
+          for p in sorted(raw.rglob('*')):
+              if not p.is_file():continue
+              rel=p.relative_to(raw).as_posix();original=p.read_bytes();public=redact(original.decode('utf-8')).encode('utf-8')
+              dest=portable/rel;dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(public)
+              hashes[rel]={'native_sha256':hashlib.sha256(original).hexdigest(),'published_sha256':sha(dest),'path_redacted':original!=public}
+          dump(portable/'RECEIPT_FILE_HASHES.json',{'description':'Native hashes bind captured bytes; published hashes bind path-redacted supplied copies.','files':hashes})
+          stamp=os.environ['GITHUB_SHA'][:12]
+          receipt=assets/f'KN_UHP_C002_CI_RECEIPTS_{stamp}.zip'
+          with zipfile.ZipFile(receipt,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:
+              for p in sorted(portable.rglob('*')):
+                  if p.is_file():z.write(p,p.relative_to(portable).as_posix())
+          subprocess.run(['git','archive','--format=zip','--output='+str(assets/f'KN_UHP_C002_SOURCE_{stamp}.zip'),'HEAD'],check=True)
+          for p in (root/'manuscript/C002_v1.0.pdf',root/os.environ['READER_PDF'],root/'C002_READABLE.md',root/'manuscript/C002_READABLE.tex',root/'docs/C002_PROOF_CORRESPONDENCE.md',root/'release_checks/READABLE_EDITION_VERIFICATION.json',root/'release_checks/READABLE_PDF_VALIDATION.json'):shutil.copy2(p,assets/p.name)
+          assert len(list(assets.glob('*.pdf')))==2
+          dump(assets/'NATIVE_CI_VERIFICATION.json',json.loads(redact(json.dumps(state))))
+          checks={p.name:sha(p) for p in sorted(assets.iterdir()) if p.is_file()}
+          (assets/'SHA256SUMS.txt').write_text(''.join(h+'  '+n+'\n' for n,h in checks.items()),encoding='utf-8')
+          print(json.dumps({'all_pass':True,'commit':state['commit'],'assets_sha256':checks},indent=2))
+          PY
+
+      - name: Create annotated tag, upload verified assets and publish the Release
+        # Token exists only in this final publishing step. No CLI login or browser.
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -Eeuo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,json,mimetypes,os,urllib.request,urllib.error,urllib.parse
+          repo=os.environ['GITHUB_REPOSITORY'];commit=os.environ['GITHUB_SHA'];tag=os.environ['RELEASE_TAG']
+          api='https://api.github.com/repos/'+repo
+          token=os.environ['GH_TOKEN'];assets=Path(os.environ['RUNNER_TEMP'])/'c002/assets'
+          def request(url,method='GET',data=None,content_type='application/json',missing=False):
+              if not url.startswith(('https://api.github.com/','https://uploads.github.com/')):raise ValueError('Unexpected authenticated API origin')
+              headers={'Accept':'application/vnd.github+json','Authorization':'Bearer '+token,'X-GitHub-Api-Version':'2022-11-28','User-Agent':'KN-C002-verified-release','Content-Type':content_type}
+              body=None if data is None else data if isinstance(data,bytes) else json.dumps(data).encode()
+              try:
+                  with urllib.request.urlopen(urllib.request.Request(url,data=body,headers=headers,method=method),timeout=120) as f:return json.load(f)
+              except urllib.error.HTTPError as e:
+                  if missing and e.code==404:return None
+                  raise RuntimeError('GitHub API '+method+' failed HTTP '+str(e.code)+' for '+url) from None
+          def main_is_tested():assert request(api+'/git/ref/heads/main')['object']['sha']==commit,'main advanced; do not tag an obsolete run'
+          state=json.loads((assets/'NATIVE_CI_VERIFICATION.json').read_text());assert state['all_pass'] and state['commit']==commit
+          main_is_tested()
+          ref=request(api+'/git/ref/tags/'+tag,missing=True)
+          if ref:
+              assert ref['object']['type']=='tag','Existing tag is not annotated; never overwrite it'
+              obj=request(api+'/git/tags/'+ref['object']['sha'])
+              assert obj['object']['type']=='commit' and obj['object']['sha']==commit,'Existing tag targets a different commit; never force-update it'
+          else:
+              message='KN-UHP-C002 native-verified release\n\nCommit: '+commit+'\nSource ID: '+state['publication_source_id']+'\nVerification: '+state['run_url']+'\n'
+              obj=request(api+'/git/tags','POST',{'tag':tag,'message':message,'object':commit,'type':'commit'})
+              ref=request(api+'/git/refs','POST',{'ref':'refs/tags/'+tag,'sha':obj['sha']})
+          # The by-tag endpoint returns published releases. List authenticated
+          # releases as well so a previous incomplete draft is actually visible.
+          matches=[];page=1
+          while True:
+              batch=request(api+'/releases?per_page=100&page='+str(page))
+              matches.extend(x for x in batch if x['tag_name']==tag)
+              if len(batch)<100:break
+              page+=1
+          assert len(matches)<=1,'Multiple releases share the deterministic tag'
+          release=matches[0] if matches else None
+          if release:
+              assert release['draft'],'Published releases are never replaced automatically'
+          else:
+              release=request(api+'/releases','POST',{'tag_name':tag,'target_commitish':commit,'name':'C002 v1.0 — reader edition and verified Lean source','body':Path(os.environ['RELEASE_NOTES']).read_text(encoding='utf-8')+'\n\nNative verification: '+state['run_url']+'\nCommit: `'+commit+'`\n','draft':True,'prerelease':False})
+          # An incomplete draft can be resumed only when existing asset digests agree.
+          existing={x['name']:x for x in request(api+f"/releases/{release['id']}/assets?per_page=100")}
+          uploaded=[]
+          for path in sorted(assets.iterdir()):
+              if not path.is_file():continue
+              data=path.read_bytes();expected='sha256:'+hashlib.sha256(data).hexdigest()
+              if path.name in existing:
+                  item=existing[path.name];assert item.get('digest')==expected,'Existing asset differs; never overwrite it'
+              else:
+                  upload=release['upload_url'].split('{',1)[0]+'?name='+urllib.parse.quote(path.name,safe='')
+                  item=request(upload,'POST',data,mimetypes.guess_type(path.name)[0] or 'application/octet-stream')
+                  item=request(api+'/releases/assets/'+str(item['id']))
+                  assert item.get('digest')==expected,'Server asset digest mismatch'
+              assert item['state']=='uploaded' and item['size']==len(data)
+              uploaded.append({'name':path.name,'sha256':expected[7:],'url':item['browser_download_url']})
+          main_is_tested()
+          published=request(api+'/releases/'+str(release['id']),'PATCH',{'draft':False})
+          assert not published['draft']
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a',encoding='utf-8') as f:
+              f.write('Verified commit: `'+commit+'`\n\nAnnotated tag object: `'+obj['sha']+'`\n\nRelease: '+published['html_url']+'\n\n')
+              for a in uploaded:f.write('- '+a['name']+': `'+a['sha256']+'`\n')
+          print(json.dumps({'release_url':published['html_url'],'commit':commit,'annotated_tag_sha':obj['sha'],'assets':uploaded},indent=2))
+          PY
+
+      - name: Retain failure details in the Actions job summary
+        if: failure()
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json,os
+          p=Path(os.environ['RUNNER_TEMP'])/'c002/native/summary.json'
+          if p.exists():
+              s=json.loads(p.read_text())
+              with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:
+                  f.write('Native release workflow failed; no successful publication is claimed.\n\n')
+                  f.write('Failure: '+s.get('failure','see failed API/install step and native stage logs')+'\n\n')
+                  for x in s['stages']:f.write('- '+x['name']+': exit '+str(x['exit_code'])+'\n')
+                  failed=[x for x in s['stages'] if x['exit_code']!=0]
+                  for x in failed[-2:]:
+                      for kind in ('stdout','stderr'):
+                          log=p.parent/(x['name']+'.'+kind+'.log')
+                          if log.exists():
+                              f.write('\n```text\n'+log.read_text(errors='replace')[-16000:]+'\n```\n')
+          PY
