@@ -1,0 +1,1049 @@
+{
+  "started_utc": "2026-10-25T04:29:59.713932+00:00",
+  "all_pass": true,
+  "publication_source_id": "94941a2ca5ea758755436c8add8daf44542ad1934fd0562a2d52542db376703e",
+  "stages": [
+    {
+      "name": "create_clean_worktree",
+      "argv": [
+        "git",
+        "-c",
+        "safe.directory=<publication-workspace>/outputs/repository",
+        "-C",
+        "<publication-workspace>/outputs/repository",
+        "worktree",
+        "add",
+        "--detach",
+        "<publication-tree>",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "seconds": 4.226303924000604,
+      "stdout_sha256": "4717314c3ae8ee07c16fd490522ae7ccd1bda7fdc7f8c8787395ae1ff1e20e43",
+      "stderr_sha256": "86a302d761c78627d58b66b9a1f5e06aa5bc8d55ad3d6da0774fa56a464ab9c6"
+    },
+    {
+      "name": "source_commit",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "seconds": 0.168565024999225,
+      "stdout_sha256": "26ab1053d3bfd91ee5ddeb940253675c0253fc474a88edf6160be278bb74369b",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "release_delta",
+      "argv": [
+        "python3",
+        "release_checks/verify_release.py",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.068798620999587,
+      "stdout_sha256": "3d808a3a6e4a90d8caaa0e7c740e1bd61ed2e94d7b660f6bfa3ab39ca36bd04c",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diagnostic_regressions",
+      "argv": [
+        "python3",
+        "release_checks/test_runner_diagnostics.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.06811329199990723,
+      "stdout_sha256": "4854ad78c8e8de57c5f235758840eb6623401ee2deb1b09d899d4f164876ae00",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "lean_version",
+      "argv": [
+        "<lean-bin>/lean",
+        "--version"
+      ],
+      "exit_code": 0,
+      "seconds": 0.03730426200036163,
+      "stdout_sha256": "355a9a028f81641782d75d6e6b58dec70f29d2f61238a9e271690259d9bf5680",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "lake_version",
+      "argv": [
+        "<lean-bin>/lake",
+        "--version"
+      ],
+      "exit_code": 0,
+      "seconds": 0.0357257670002582,
+      "stdout_sha256": "36526a338068c343bedff5daa38fec328b4f722df1e8f0b5d026d4f0f908f3a3",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "copy_dependency_caches",
+      "argv": [
+        "cp",
+        "-a",
+        "--reflink=auto",
+        "<native-home>/kn-c002-candidate-001-20261021/project/.lake/packages",
+        "<publication-tree>/.lake/packages"
+      ],
+      "exit_code": 0,
+      "seconds": 73.18430409400025,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dep_mathlib_head",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "seconds": 0.02194426799997018,
+      "stdout_sha256": "d26684ea790064f49bcb150415b3a062ec30b5e646b207927aa3fc5fcbb43fbe",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dep_mathlib_tracked",
+      "argv": [
+        "git",
+        "status",
+        "--porcelain",
+        "--untracked-files=no"
+      ],
+      "exit_code": 0,
+      "seconds": 2.232953386999725,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dep_mathlib_untracked",
+      "argv": [
+        "git",
+        "ls-files",
+        "--others",
+        "--exclude-standard"
+      ],
+      "exit_code": 0,
+      "seconds": 0.01960800399956497,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dep_plausible_head",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "seconds": 0.00864021000052162,
+      "stdout_sha256": "8e19735519205e6e1b0a59824699f406af5b5ce84a32d2a6c583717ce045b900",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dep_plausible_tracked",
+      "argv": [
+        "git",
+        "status",
+        "--porcelain",
+        "--untracked-files=no"
+      ],
+      "exit_code": 0,
+      "seconds": 0.019662018999952124,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dep_plausible_untracked",
+      "argv": [
+        "git",
+        "ls-files",
+        "--others",
+        "--exclude-standard"
+      ],
+      "exit_code": 0,
+      "seconds": 0.007088057000146364,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dep_LeanSearchClient_head",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "seconds": 0.007950661999529984,
+      "stdout_sha256": "969f2fabfb7ffe3973dce9836aa523b36b30aba71950f358c0148f7daf1909cd",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dep_LeanSearchClient_tracked",
+      "argv": [
+        "git",
+        "status",
+        "--porcelain",
+        "--untracked-files=no"
+      ],
+      "exit_code": 0,
+      "seconds": 0.011772855000344862,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dep_LeanSearchClient_untracked",
+      "argv": [
+        "git",
+        "ls-files",
+        "--others",
+        "--exclude-standard"
+      ],
+      "exit_code": 0,
+      "seconds": 0.005184040000131063,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dep_importGraph_head",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "seconds": 0.007817382000212092,
+      "stdout_sha256": "b7befbf415605485d009aa7b002b346adb7ee3ce028e97b697fe5f259d320274",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dep_importGraph_tracked",
+      "argv": [
+        "git",
+        "status",
+        "--porcelain",
+        "--untracked-files=no"
+      ],
+      "exit_code": 0,
+      "seconds": 0.03590270699987741,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dep_importGraph_untracked",
+      "argv": [
+        "git",
+        "ls-files",
+        "--others",
+        "--exclude-standard"
+      ],
+      "exit_code": 0,
+      "seconds": 0.008108095999887155,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dep_proofwidgets_head",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "seconds": 0.007688300000154413,
+      "stdout_sha256": "5c6fde3e5ec3bc7c00fcedc25e51a7d1d68b2dd0ba1057f4cd3a742f780cfc1d",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dep_proofwidgets_tracked",
+      "argv": [
+        "git",
+        "status",
+        "--porcelain",
+        "--untracked-files=no"
+      ],
+      "exit_code": 0,
+      "seconds": 0.06834910399993532,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dep_proofwidgets_untracked",
+      "argv": [
+        "git",
+        "ls-files",
+        "--others",
+        "--exclude-standard"
+      ],
+      "exit_code": 0,
+      "seconds": 0.005414209000264236,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dep_aesop_head",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "seconds": 0.00795888799984823,
+      "stdout_sha256": "e2f238dae0ad15ad802261fd5664fbb7264ca23028ec463653ee359dedad69b1",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dep_aesop_tracked",
+      "argv": [
+        "git",
+        "status",
+        "--porcelain",
+        "--untracked-files=no"
+      ],
+      "exit_code": 0,
+      "seconds": 0.06860834500002966,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dep_aesop_untracked",
+      "argv": [
+        "git",
+        "ls-files",
+        "--others",
+        "--exclude-standard"
+      ],
+      "exit_code": 0,
+      "seconds": 0.008473235000565182,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dep_Qq_head",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "seconds": 0.007011024000348698,
+      "stdout_sha256": "6ea0e5d827cd28719f0f8303c77c64ffd115d117fb873c61dcc064c789b49021",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dep_Qq_tracked",
+      "argv": [
+        "git",
+        "status",
+        "--porcelain",
+        "--untracked-files=no"
+      ],
+      "exit_code": 0,
+      "seconds": 0.01215936199969292,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dep_Qq_untracked",
+      "argv": [
+        "git",
+        "ls-files",
+        "--others",
+        "--exclude-standard"
+      ],
+      "exit_code": 0,
+      "seconds": 0.0058940340004483005,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dep_batteries_head",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "seconds": 0.008517830000528193,
+      "stdout_sha256": "a10c5cc1562c7e05002879cbb387405d1e84dfb2b052e4a9da3d7b0915278e17",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dep_batteries_tracked",
+      "argv": [
+        "git",
+        "status",
+        "--porcelain",
+        "--untracked-files=no"
+      ],
+      "exit_code": 0,
+      "seconds": 0.020830492000641243,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dep_batteries_untracked",
+      "argv": [
+        "git",
+        "ls-files",
+        "--others",
+        "--exclude-standard"
+      ],
+      "exit_code": 0,
+      "seconds": 0.009147222999672522,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dep_Cli_head",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "seconds": 0.008410104000176943,
+      "stdout_sha256": "2e20e2a649dd57be51b7d287730d045342813e1fa6e2e7de3e2a6c249e2c51c1",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dep_Cli_tracked",
+      "argv": [
+        "git",
+        "status",
+        "--porcelain",
+        "--untracked-files=no"
+      ],
+      "exit_code": 0,
+      "seconds": 0.01201147600022523,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dep_Cli_untracked",
+      "argv": [
+        "git",
+        "ls-files",
+        "--others",
+        "--exclude-standard"
+      ],
+      "exit_code": 0,
+      "seconds": 0.00811852600054408,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "native_build",
+      "argv": [
+        "<lean-bin>/lake",
+        "build",
+        "KN",
+        "AuditKN"
+      ],
+      "exit_code": 0,
+      "seconds": 767.6105831229997,
+      "stdout_sha256": "cab4a7dd2cc3b6530ddfdfb05524487df57fc0281463fd70d689db41f9e323cc",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "strict_audit",
+      "argv": [
+        "<lean-bin>/lake",
+        "env",
+        "lean",
+        "-j1",
+        "-DwarningAsError=true",
+        "AuditKN.lean"
+      ],
+      "exit_code": 0,
+      "seconds": 2.379725476999738,
+      "stdout_sha256": "eca5e72439f707694092a74a57581e3ba78305e7ad067823afe839618cbdc473",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "archived_root_comparison",
+      "argv": [
+        "python3",
+        "<publication-workspace>/work/reference/compare_native_baseline.py",
+        "<publication-workspace>/outputs/verification_receipts/strict_audit.stdout.log"
+      ],
+      "exit_code": 0,
+      "seconds": 0.1215951939993829,
+      "stdout_sha256": "fceb04d5fd52f2286dc60c560036432867c43f4fffad8de1ce9eda3d71e8f554",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "fresh_kernel_replay",
+      "argv": [
+        "<lean-bin>/lake",
+        "env",
+        "leanchecker",
+        "--fresh",
+        "--verbose",
+        "KN"
+      ],
+      "exit_code": 0,
+      "seconds": 546.4379887039995,
+      "stdout_sha256": "2031b97106a2626ff291d45daef792317ea064ae87456be8a2e038e053df3ec6",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "corrected_author_controls",
+      "argv": [
+        "python3",
+        "validation/run_controls.py",
+        "--project",
+        "<publication-tree>",
+        "--lean-bin-dir",
+        "<lean-bin>",
+        "--results",
+        "<publication-workspace>/outputs/verification_receipts/controls"
+      ],
+      "exit_code": 0,
+      "seconds": 67.65916971600018,
+      "stdout_sha256": "85291b299dd2f1cfc14d7f015edff6c78139f58f0846b9a19177fa3614d89416",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "source_clean_after",
+      "argv": [
+        "git",
+        "status",
+        "--porcelain",
+        "--untracked-files=no"
+      ],
+      "exit_code": 0,
+      "seconds": 0.2699103589993683,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "mathematical_audit_restarted": false,
+  "project_objects_before": 0,
+  "verified_source_commit": "5b347e02b0f795b0bc2b8d796987fdb3f255459f",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "lake_version": "Lake version 5.0.0-src+5045d00 (Lean version 4.34.1)",
+  "runtime_hashes": {
+    "lean": "e8baaa71855a616dc351028f3ad2200051b0671f423a1696a100e809302d5550",
+    "lake": "6f53827dab18010d6c690d14c8401cacabc1db958edb3552a877ed4cf1dd995d",
+    "leanchecker": "ccef1bfe9bfeecea65137d94a69033c1a89f360711f50fa3178e7ba3e696fcbe"
+  },
+  "runtime_matches_original": true,
+  "dependencies_verified": 9,
+  "controls": {
+    "total": 30,
+    "accepts": 5,
+    "intended_rejects": 25
+  },
+  "dependency_sources_unchanged_after": true,
+  "finished_utc": "2026-10-25T04:55:14.374507+00:00",
+  "frozen_source_id": "dd09e7f6962f7e09b083a46d942083773b4c734821e9d8012dca8387d6c665ff",
+  "manuscript_sha256": "3918225f220943dcdf67a2db7646ab7c375238d0a7ec204a1368a938a6173797",
+  "unchanged_lean_files": 325,
+  "custom_axiom_counts": {
+    "KN.Physics.radiative_mode_exclusion": 22,
+    "KN.Physics.physical_mode_exclusion": 22,
+    "KN.Angular.original_source_exclusion": 18,
+    "KN.Kerr.kerr_full_field_exclusion": 6
+  },
+  "physical_entry_boundary": "The roots retain PublishedPhysicalNecessaryData or PublishedEinsteinMaxwellEntry and admissibility as explicit premises; no tensor-level physical-entry construction is claimed.",
+  "receipts_asset": {
+    "filename": "KN_UHP_C002_NATIVE_PUBLICATION_RECEIPTS_20261025.zip",
+    "sha256": "c672baf89fdf22eef4a7d582ce2df77d5c05a3a72d3e4b29df13939e7c47bb5e",
+    "bytes": 5302304,
+    "local_paths_redacted": true
+  },
+  "scientific_source_unchanged_after_native_gates": true,
+  "archived_root_comparison": {
+    "all_pass": true,
+    "comparison": "Native theorem types, entry structure outputs and custom/standard axiom sets against preserved successful Codex audit log",
+    "native_output_sha256": "eca5e72439f707694092a74a57581e3ba78305e7ad067823afe839618cbdc473",
+    "archived_output_sha256": "eca5e72439f707694092a74a57581e3ba78305e7ad067823afe839618cbdc473",
+    "archived_zip_sha256": "b63abf88234062d5430cfe09eff26b1e24dc1b976c907567b6195596980cfb33",
+    "checks": {
+      "root_types": {
+        "KN.Physics.radiative_mode_exclusion": true,
+        "KN.Physics.physical_mode_exclusion": true,
+        "KN.Angular.original_source_exclusion": true,
+        "KN.Angular.full_field_exclusion": true,
+        "KN.Kerr.kerr_full_field_exclusion": true
+      },
+      "entry_structures": {
+        "KN.Physics.PublishedPhysicalNecessaryData": true,
+        "KN.Physics.PublishedEinsteinMaxwellEntry": true
+      },
+      "axioms": {
+        "KN.Physics.radiative_mode_exclusion": true,
+        "KN.Physics.physical_mode_exclusion": true,
+        "KN.Angular.original_source_exclusion": true,
+        "KN.Kerr.kerr_full_field_exclusion": true
+      }
+    }
+  },
+  "independent_control_diagnostics": {
+    "kind": "independent intended-diagnostic validation, not mathematical re-audit",
+    "timestamp_utc": "2026-10-25T04:55:30.301952+00:00",
+    "archive_sha256": "b63abf88234062d5430cfe09eff26b1e24dc1b976c907567b6195596980cfb33",
+    "baseline_case_count": 30,
+    "positive_count": 5,
+    "negative_count": 25,
+    "classifier_selftest_rejections": 125,
+    "native_results_checked": true,
+    "native_summary_sha256": "f143f010fa728e7444b2cf46652179e38e3e33e3f4fc2da745a342d14fd328e1",
+    "cases": [
+      {
+        "source": "validation/controls_angular/Positive.lean",
+        "native_exit_code": 0,
+        "intended_diagnostics": [],
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "passed": true,
+        "issues": []
+      },
+      {
+        "source": "validation/controls_angular/RejectArbitraryLpBoundary.lean",
+        "native_exit_code": 1,
+        "intended_diagnostics": [
+          {
+            "source": "validation/controls_angular/RejectArbitraryLpBoundary.lean",
+            "line": 6,
+            "column": 2,
+            "category": "Tactic `assumption` failed"
+          }
+        ],
+        "log_sha256": "24b09c4ed1d0d6bad2ef2dc5cabcc1337ad12400ef2bdf3a97d87ac231686763",
+        "passed": true,
+        "issues": []
+      },
+      {
+        "source": "validation/controls_angular/RejectConjugation.lean",
+        "native_exit_code": 1,
+        "intended_diagnostics": [
+          {
+            "source": "validation/controls_angular/RejectConjugation.lean",
+            "line": 3,
+            "column": 46,
+            "category": "unsolved goals"
+          }
+        ],
+        "log_sha256": "9ba030cf33f6bcbfc3433a6e4825c9160220cefe0c684f4f3c16d02cbe2c8d10",
+        "passed": true,
+        "issues": []
+      },
+      {
+        "source": "validation/controls_angular/RejectOrdinaryEigenbasis.lean",
+        "native_exit_code": 1,
+        "intended_diagnostics": [
+          {
+            "source": "validation/controls_angular/RejectOrdinaryEigenbasis.lean",
+            "line": 3,
+            "column": 60,
+            "category": "unsolved goals"
+          }
+        ],
+        "log_sha256": "d715abb47bc17ea53893df038446b5cbb966fc3b0260865a5d61e42e54c7a963",
+        "passed": true,
+        "issues": []
+      },
+      {
+        "source": "validation/controls_angular/RejectPositiveBetaForSignedQ.lean",
+        "native_exit_code": 1,
+        "intended_diagnostics": [
+          {
+            "source": "validation/controls_angular/RejectPositiveBetaForSignedQ.lean",
+            "line": 3,
+            "column": 36,
+            "category": "unsolved goals"
+          }
+        ],
+        "log_sha256": "3ba501687d430df4e1ee2f181346aca82138b0eaf9d257464d87be49fef91563",
+        "passed": true,
+        "issues": []
+      },
+      {
+        "source": "validation/controls_angular/RejectUnconjugatedPrimal.lean",
+        "native_exit_code": 1,
+        "intended_diagnostics": [
+          {
+            "source": "validation/controls_angular/RejectUnconjugatedPrimal.lean",
+            "line": 11,
+            "column": 2,
+            "category": "Type mismatch"
+          }
+        ],
+        "log_sha256": "ebae2864579f0ac70ead8969379f3aa7bc8c3f64e6d34d491ee54f578856b6c1",
+        "passed": true,
+        "issues": []
+      },
+      {
+        "source": "validation/controls_angular/RejectUnpairedSign.lean",
+        "native_exit_code": 1,
+        "intended_diagnostics": [
+          {
+            "source": "validation/controls_angular/RejectUnpairedSign.lean",
+            "line": 3,
+            "column": 77,
+            "category": "unsolved goals"
+          }
+        ],
+        "log_sha256": "a43c0fcd76101e4be019130491862a13ef00106fb16171c3e0ade8f90b695b57",
+        "passed": true,
+        "issues": []
+      },
+      {
+        "source": "validation/controls_energy/Counterexamples.lean",
+        "native_exit_code": 0,
+        "intended_diagnostics": [],
+        "log_sha256": "113c93e86e00b225ef41e29245d8a4f5f62fd317242bb1a4ff61f58c1137e8f0",
+        "passed": true,
+        "issues": []
+      },
+      {
+        "source": "validation/controls_energy/RejectMissingCorrection.lean",
+        "native_exit_code": 1,
+        "intended_diagnostics": [
+          {
+            "source": "validation/controls_energy/RejectMissingCorrection.lean",
+            "line": 9,
+            "column": 2,
+            "category": "Type mismatch"
+          }
+        ],
+        "log_sha256": "0a7ea4670b88e53e8dd581a4467248f5fc14a516a70874f0c6d72ef25a29f736",
+        "passed": true,
+        "issues": []
+      },
+      {
+        "source": "validation/controls_energy/RejectNegativeK.lean",
+        "native_exit_code": 1,
+        "intended_diagnostics": [
+          {
+            "source": "validation/controls_energy/RejectNegativeK.lean",
+            "line": 5,
+            "column": 5,
+            "category": "unsolved goals"
+          }
+        ],
+        "log_sha256": "73ab9f4878a73172e06b5486f0862d8a7e9b65d7cd5b403583c30874791baab6",
+        "passed": true,
+        "issues": []
+      },
+      {
+        "source": "validation/controls_energy/RejectNonUHP.lean",
+        "native_exit_code": 1,
+        "intended_diagnostics": [
+          {
+            "source": "validation/controls_energy/RejectNonUHP.lean",
+            "line": 4,
+            "column": 43,
+            "category": "unsolved goals"
+          }
+        ],
+        "log_sha256": "2ebbf33951a35db863d011e9c83c5c813a6c2afd5dca34b0ed8eeae44659b1a4",
+        "passed": true,
+        "issues": []
+      },
+      {
+        "source": "validation/controls_energy/RejectNoOriginalHorizon.lean",
+        "native_exit_code": 1,
+        "intended_diagnostics": [
+          {
+            "source": "validation/controls_energy/RejectNoOriginalHorizon.lean",
+            "line": 15,
+            "column": 20,
+            "category": "Tactic `assumption` failed"
+          },
+          {
+            "source": "validation/controls_energy/RejectNoOriginalHorizon.lean",
+            "line": 15,
+            "column": 34,
+            "category": "Tactic `assumption` failed"
+          }
+        ],
+        "log_sha256": "40b0eb138423dc5e0a4a52c3e128c29c79c8a2b9a20664b4ec51f5903dde4329",
+        "passed": true,
+        "issues": []
+      },
+      {
+        "source": "validation/controls_energy/RejectUnboundedAngularAverage.lean",
+        "native_exit_code": 1,
+        "intended_diagnostics": [
+          {
+            "source": "validation/controls_energy/RejectUnboundedAngularAverage.lean",
+            "line": 4,
+            "column": 71,
+            "category": "unsolved goals"
+          }
+        ],
+        "log_sha256": "3e88146df28a9b6357278c502b48d23f85a8a107fdcf91cbbb3a5692fecd3dcb",
+        "passed": true,
+        "issues": []
+      },
+      {
+        "source": "validation/controls_energy/RejectUnsignedSpin.lean",
+        "native_exit_code": 1,
+        "intended_diagnostics": [
+          {
+            "source": "validation/controls_energy/RejectUnsignedSpin.lean",
+            "line": 4,
+            "column": 81,
+            "category": "unsolved goals"
+          }
+        ],
+        "log_sha256": "b9ecbb90b0b578516d162df72dcdfc04617b8342f32bc784d123f76fc8be25c9",
+        "passed": true,
+        "issues": []
+      },
+      {
+        "source": "validation/controls_energy/RejectVanishingCorrectionDenominator.lean",
+        "native_exit_code": 1,
+        "intended_diagnostics": [
+          {
+            "source": "validation/controls_energy/RejectVanishingCorrectionDenominator.lean",
+            "line": 10,
+            "column": 52,
+            "category": "unsolved goals"
+          }
+        ],
+        "log_sha256": "3d302c36e0311fd858e946b6cd91808897509d016e07708451972baff618522b",
+        "passed": true,
+        "issues": []
+      },
+      {
+        "source": "validation/controls_energy/RejectWrongWeightDomain.lean",
+        "native_exit_code": 1,
+        "intended_diagnostics": [
+          {
+            "source": "validation/controls_energy/RejectWrongWeightDomain.lean",
+            "line": 4,
+            "column": 52,
+            "category": "unsolved goals"
+          }
+        ],
+        "log_sha256": "8f3bf080f2aae1db7e5b47c0457c12b78cc8ef8a91a718bbc4db1e809bf010a3",
+        "passed": true,
+        "issues": []
+      },
+      {
+        "source": "validation/controls_energy/SignedChargeAndSpin.lean",
+        "native_exit_code": 0,
+        "intended_diagnostics": [],
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "passed": true,
+        "issues": []
+      },
+      {
+        "source": "validation/controls_kerr/PositiveControls.lean",
+        "native_exit_code": 0,
+        "intended_diagnostics": [],
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "passed": true,
+        "issues": []
+      },
+      {
+        "source": "validation/controls_kerr/RejectHorizonAsNonSpecial.lean",
+        "native_exit_code": 1,
+        "intended_diagnostics": [
+          {
+            "source": "validation/controls_kerr/RejectHorizonAsNonSpecial.lean",
+            "line": 7,
+            "column": 39,
+            "category": "Type mismatch"
+          }
+        ],
+        "log_sha256": "aca48dff436dcfd01675576fd81251551d509fa21aba67b64f88c6a08cefc3f1",
+        "passed": true,
+        "issues": []
+      },
+      {
+        "source": "validation/controls_kerr/RejectPositiveWhiting.lean",
+        "native_exit_code": 1,
+        "intended_diagnostics": [
+          {
+            "source": "validation/controls_kerr/RejectPositiveWhiting.lean",
+            "line": 5,
+            "column": 55,
+            "category": "unsolved goals"
+          }
+        ],
+        "log_sha256": "8563c7349c722028471ff0f2b69c2aac7d5f0892778d07e71621297ab3405f4d",
+        "passed": true,
+        "issues": []
+      },
+      {
+        "source": "validation/controls_kerr/RejectResonantFuchs.lean",
+        "native_exit_code": 1,
+        "intended_diagnostics": [
+          {
+            "source": "validation/controls_kerr/RejectResonantFuchs.lean",
+            "line": 8,
+            "column": 58,
+            "category": "unsolved goals"
+          }
+        ],
+        "log_sha256": "6fcc1a8b6e456e2ee2b73940edce6fb760a44da6bac447a5fd2135c67f07e49a",
+        "passed": true,
+        "issues": []
+      },
+      {
+        "source": "validation/controls_kerr/RejectSeparatedAsFullField.lean",
+        "native_exit_code": 1,
+        "intended_diagnostics": [
+          {
+            "source": "validation/controls_kerr/RejectSeparatedAsFullField.lean",
+            "line": 13,
+            "column": 54,
+            "category": "Application type mismatch"
+          }
+        ],
+        "log_sha256": "71f9907e1177f53fb65f3942d22fb0de281baeca0bdcc5ae745dc890707f47c2",
+        "passed": true,
+        "issues": []
+      },
+      {
+        "source": "validation/controls_kerr/RejectZeroLeadingCoefficient.lean",
+        "native_exit_code": 1,
+        "intended_diagnostics": [
+          {
+            "source": "validation/controls_kerr/RejectZeroLeadingCoefficient.lean",
+            "line": 7,
+            "column": 2,
+            "category": "unsolved goals"
+          }
+        ],
+        "log_sha256": "fb324a5d9d42a13f003102d4bd2259dba57618c45f6aeb4cdc6d9ad8edf78026",
+        "passed": true,
+        "issues": []
+      },
+      {
+        "source": "validation/controls_radial/BoundaryWithoutEquation.lean",
+        "native_exit_code": 1,
+        "intended_diagnostics": [
+          {
+            "source": "validation/controls_radial/BoundaryWithoutEquation.lean",
+            "line": 12,
+            "column": 2,
+            "category": "Type mismatch"
+          }
+        ],
+        "log_sha256": "00089ed2f18d227050f5f78b6c561ea119115245afd9f29b4552729f4fa6f820",
+        "passed": true,
+        "issues": []
+      },
+      {
+        "source": "validation/controls_radial/MissingDelta.lean",
+        "native_exit_code": 1,
+        "intended_diagnostics": [
+          {
+            "source": "validation/controls_radial/MissingDelta.lean",
+            "line": 5,
+            "column": 2,
+            "category": "Type mismatch"
+          }
+        ],
+        "log_sha256": "afe92a78b09ed3b142b86bae7cb68c16f12df0ad925a3bbd59721a2c44728792",
+        "passed": true,
+        "issues": []
+      },
+      {
+        "source": "validation/controls_radial/OneChiralBlock.lean",
+        "native_exit_code": 1,
+        "intended_diagnostics": [
+          {
+            "source": "validation/controls_radial/OneChiralBlock.lean",
+            "line": 7,
+            "column": 54,
+            "category": "Application type mismatch"
+          }
+        ],
+        "log_sha256": "fc8251f97ba00236686834cbdb556e94ff0e48f3764b87a8842f3b61826f923f",
+        "passed": true,
+        "issues": []
+      },
+      {
+        "source": "validation/controls_radial/PoleAsNonresonant.lean",
+        "native_exit_code": 1,
+        "intended_diagnostics": [
+          {
+            "source": "validation/controls_radial/PoleAsNonresonant.lean",
+            "line": 9,
+            "column": 62,
+            "category": "unsolved goals"
+          }
+        ],
+        "log_sha256": "1787aa81c50a41eb150354e89fa9120f654b5990693824406cde71ffbbfe96dd",
+        "passed": true,
+        "issues": []
+      },
+      {
+        "source": "validation/controls_radial/Positive.lean",
+        "native_exit_code": 0,
+        "intended_diagnostics": [],
+        "log_sha256": "8f6592f53b160930bf22948f39f3236db3765370d95d71bacf4f3feda448e50f",
+        "passed": true,
+        "issues": []
+      },
+      {
+        "source": "validation/controls_radial/SwappedHorizonWeight.lean",
+        "native_exit_code": 1,
+        "intended_diagnostics": [
+          {
+            "source": "validation/controls_radial/SwappedHorizonWeight.lean",
+            "line": 13,
+            "column": 94,
+            "category": "Application type mismatch"
+          }
+        ],
+        "log_sha256": "31ffd8a59e98b95b788da429e807ef6a499ebc129cc09f19e8640c50b3542284",
+        "passed": true,
+        "issues": []
+      },
+      {
+        "source": "validation/controls_radial/WrongDeltaSign.lean",
+        "native_exit_code": 1,
+        "intended_diagnostics": [
+          {
+            "source": "validation/controls_radial/WrongDeltaSign.lean",
+            "line": 7,
+            "column": 2,
+            "category": "Type mismatch"
+          }
+        ],
+        "log_sha256": "f71af0a201d69feb73bd78600d14eea1ebf610ba09cca2f2482205fa87a4c352",
+        "passed": true,
+        "issues": []
+      }
+    ],
+    "issues": [],
+    "all_pass": true
+  },
+  "native_import_failure_probes": {
+    "all_pass": true,
+    "description": "The unchanged patched runner rejects actual native missing and corrupt import objects.",
+    "cases": [
+      {
+        "variant": "missing_object",
+        "runner_exit_code": 1,
+        "lean_exit_code": 1,
+        "incorrectly_accepted": false,
+        "native_diagnostic": "validation/controls_angular/RejectConjugation.lean:1:0: error: object file '<isolated-worktrees>/probe_missing_object/.lake/build/lib/lean/KN/Angular/PrimalEigenvector.olean' of module KN.Angular.PrimalEigenvector does not exist\n",
+        "fixture_sha256": "19acd62a805c919f4dc2074ae3a8058d4ba2455fa7d4fabe1464e5ea2282da40"
+      },
+      {
+        "variant": "corrupt_object",
+        "runner_exit_code": 1,
+        "lean_exit_code": 1,
+        "incorrectly_accepted": false,
+        "native_diagnostic": "validation/controls_angular/RejectConjugation.lean:1:0: error: failed to read file '<isolated-worktrees>/probe_corrupt_object/.lake/build/lib/lean/KN/Angular/PrimalEigenvector.olean', invalid header\n",
+        "fixture_sha256": "19acd62a805c919f4dc2074ae3a8058d4ba2455fa7d4fabe1464e5ea2282da40"
+      }
+    ]
+  },
+  "additive_publication_changes_after_native_gates": [
+    "Portable native receipts, preserved archived baseline and comparison utility added.",
+    "Coverage appendix accurately discloses the absent historical machine-readable coverage JSON.",
+    "Reproduction documentation links these new receipts; no file in the 342-file scientific/source identity changed."
+  ]
+}

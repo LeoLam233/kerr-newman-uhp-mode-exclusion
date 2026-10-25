@@ -1,0 +1,640 @@
+{
+  "schema": 1,
+  "kind": "archived intended author-control diagnostic baseline",
+  "archive_sha256": "b63abf88234062d5430cfe09eff26b1e24dc1b976c907567b6195596980cfb33",
+  "cases": [
+    {
+      "source": "validation/controls_angular/Positive.lean",
+      "source_sha256": "ff127f4d7e472e526fb3c79f7866aed018d8cfa30381e46a68afab4e6ab2ea19",
+      "expected": "pass",
+      "exit_code": 0,
+      "log": "controls_angular_Positive.log",
+      "archived_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "diagnostics": [],
+      "required_markers": [],
+      "fixture_error_lines": {}
+    },
+    {
+      "source": "validation/controls_angular/RejectArbitraryLpBoundary.lean",
+      "source_sha256": "6c22ea96e5d4c19309b7f1057498cf52f63b16ab16d2baf9383fec403c341673",
+      "expected": "reject",
+      "exit_code": 1,
+      "log": "controls_angular_RejectArbitraryLpBoundary.log",
+      "archived_log_sha256": "1989b0ecc02558e74f2cf7f7c1ed64a23c4dd6231b75e6ddf2cdaba259d00812",
+      "diagnostics": [
+        {
+          "source": "validation/controls_angular/RejectArbitraryLpBoundary.lean",
+          "line": 6,
+          "column": 2,
+          "category": "Tactic `assumption` failed"
+        }
+      ],
+      "required_markers": [
+        "OriginalSourceBoundary",
+        "high low"
+      ],
+      "fixture_error_lines": {
+        "6": "  assumption"
+      }
+    },
+    {
+      "source": "validation/controls_angular/RejectConjugation.lean",
+      "source_sha256": "19acd62a805c919f4dc2074ae3a8058d4ba2455fa7d4fabe1464e5ea2282da40",
+      "expected": "reject",
+      "exit_code": 1,
+      "log": "controls_angular_RejectConjugation.log",
+      "archived_log_sha256": "edbe785d1ddb2fa91be4273adf1924a291b8e5fe08eea7252719ce42998fd98d",
+      "diagnostics": [
+        {
+          "source": "validation/controls_angular/RejectConjugation.lean",
+          "line": 3,
+          "column": 46,
+          "category": "unsolved goals"
+        }
+      ],
+      "required_markers": [
+        "⊢ -Complex.I = Complex.I"
+      ],
+      "fixture_error_lines": {
+        "3": "example : star (Complex.I : ℂ) = Complex.I := by simp"
+      }
+    },
+    {
+      "source": "validation/controls_angular/RejectOrdinaryEigenbasis.lean",
+      "source_sha256": "a805d853622c391afe860d7b6ed39d0ca1a43bb14934f0baf01afec3847adeb6",
+      "expected": "reject",
+      "exit_code": 1,
+      "log": "controls_angular_RejectOrdinaryEigenbasis.log",
+      "archived_log_sha256": "7b23102747aeee2268eee6221150c6168f4cc73fa148733c0c6810109f2d1e05",
+      "diagnostics": [
+        {
+          "source": "validation/controls_angular/RejectOrdinaryEigenbasis.lean",
+          "line": 3,
+          "column": 60,
+          "category": "unsolved goals"
+        }
+      ],
+      "required_markers": [
+        "⊢ False"
+      ],
+      "fixture_error_lines": {
+        "3": "example : ((fun v : ℂ × ℂ => (v.2,(0:ℂ))) (0,1)) = (0,0) := by norm_num"
+      }
+    },
+    {
+      "source": "validation/controls_angular/RejectPositiveBetaForSignedQ.lean",
+      "source_sha256": "14565c451019527bcc6451a5925b4662f31b01964574d0198c4a4dbf0592d894",
+      "expected": "reject",
+      "exit_code": 1,
+      "log": "controls_angular_RejectPositiveBetaForSignedQ.log",
+      "archived_log_sha256": "a95d1042dc7db442b8b044ae87b52d202874e3b4ec177fb7b481984fd81f8d9e",
+      "diagnostics": [
+        {
+          "source": "validation/controls_angular/RejectPositiveBetaForSignedQ.lean",
+          "line": 3,
+          "column": 36,
+          "category": "unsolved goals"
+        }
+      ],
+      "required_markers": [
+        "⊢ False"
+      ],
+      "fixture_error_lines": {
+        "3": "example : 0 < (3*(2:ℝ)/(2*(-1))) := by norm_num"
+      }
+    },
+    {
+      "source": "validation/controls_angular/RejectUnconjugatedPrimal.lean",
+      "source_sha256": "d89d2b65bf78a66ef4108319fce910aebd7ea8d40843d1f19936dda9bb7c6bdc",
+      "expected": "reject",
+      "exit_code": 1,
+      "log": "controls_angular_RejectUnconjugatedPrimal.log",
+      "archived_log_sha256": "d1bd632469b159b0a7fd6f8925d8c80103d8e2713e231cc6cc630b3384c62482",
+      "diagnostics": [
+        {
+          "source": "validation/controls_angular/RejectUnconjugatedPrimal.lean",
+          "line": 11,
+          "column": 2,
+          "category": "Type mismatch"
+        }
+      ],
+      "required_markers": [
+        "reduced_eigenvector_of_chiral_adjoint",
+        "star z • u",
+        "z • u",
+        "StaticGraph"
+      ],
+      "fixture_error_lines": {
+        "11": "  exact reduced_eigenvector_of_chiral_adjoint b hQ sigma hsigma m omega z e he hee hne hc"
+      }
+    },
+    {
+      "source": "validation/controls_angular/RejectUnpairedSign.lean",
+      "source_sha256": "26cd31974cb4a8fb0578bc5314e496568816ed38aff9fbe13260f1a2e85b5a8d",
+      "expected": "reject",
+      "exit_code": 1,
+      "log": "controls_angular_RejectUnpairedSign.log",
+      "archived_log_sha256": "323f1c7495f4078503f6b2d69bc795308dad1fdc53b6a8c9b2c6ada4cb55055a",
+      "diagnostics": [
+        {
+          "source": "validation/controls_angular/RejectUnpairedSign.lean",
+          "line": 3,
+          "column": 77,
+          "category": "unsolved goals"
+        }
+      ],
+      "required_markers": [
+        "⊢ False"
+      ],
+      "fixture_error_lines": {
+        "3": "example : KN.Angular.Jacobi.staticEigenvalue 0 3 (.inr ⟨by norm_num⟩) = 3 := by"
+      }
+    },
+    {
+      "source": "validation/controls_energy/Counterexamples.lean",
+      "source_sha256": "8bb342d042aee581e0b360e1f1fd7371ba53472ffd5e6cbcbe6c49918981a897",
+      "expected": "pass",
+      "exit_code": 0,
+      "log": "controls_energy_Counterexamples.log",
+      "archived_log_sha256": "cd79d0ddd41997220d452fc1688154a1f242f26d5ddb7ffd6650521fe722190f",
+      "diagnostics": [],
+      "required_markers": [],
+      "fixture_error_lines": {}
+    },
+    {
+      "source": "validation/controls_energy/RejectMissingCorrection.lean",
+      "source_sha256": "0744043709fa0bf905705ef245bde8cad37c0433c9891916bf5373ba5a4626dd",
+      "expected": "reject",
+      "exit_code": 1,
+      "log": "controls_energy_RejectMissingCorrection.log",
+      "archived_log_sha256": "2523dff3eda8dba3dac7719c9bcacb66eb2e5436fc6572902aef63b4d0cd2767",
+      "diagnostics": [
+        {
+          "source": "validation/controls_energy/RejectMissingCorrection.lean",
+          "line": 9,
+          "column": 2,
+          "category": "Type mismatch"
+        }
+      ],
+      "required_markers": [
+        "zeroExtension_second_source",
+        "deltaValue 0 1",
+        "but is expected to have type"
+      ],
+      "fixture_error_lines": {
+        "9": "  exact KN.ChargedRadial.zeroExtension_second_source 0 (fun _ => 0) (fun _ => 1) (fun _ => 1)"
+      }
+    },
+    {
+      "source": "validation/controls_energy/RejectNegativeK.lean",
+      "source_sha256": "ed9f8ca3c45481369f8954fb2f12e9fb85bba50e82dc4f62f53381944e44e7ad",
+      "expected": "reject",
+      "exit_code": 1,
+      "log": "controls_energy_RejectNegativeK.log",
+      "archived_log_sha256": "7b35f6ef9e99d14166772ea6af0556b23792fc79989393cd19965846ae13a7cb",
+      "diagnostics": [
+        {
+          "source": "validation/controls_energy/RejectNegativeK.lean",
+          "line": 5,
+          "column": 5,
+          "category": "unsolved goals"
+        }
+      ],
+      "required_markers": [
+        "⊢ False"
+      ],
+      "fixture_error_lines": {
+        "5": "    (by norm_num) (by norm_num) (by norm_num [Complex.I_sq])"
+      }
+    },
+    {
+      "source": "validation/controls_energy/RejectNonUHP.lean",
+      "source_sha256": "96982c8ca883ca65bf2d15ecd126b1649ae23c5c4898e66c01af7fb17c86482d",
+      "expected": "reject",
+      "exit_code": 1,
+      "log": "controls_energy_RejectNonUHP.log",
+      "archived_log_sha256": "fcc0e9c49c08c21b8098dfd59f708a44ab24e3985426337fa34e659b5e49ac23",
+      "diagnostics": [
+        {
+          "source": "validation/controls_energy/RejectNonUHP.lean",
+          "line": 4,
+          "column": 43,
+          "category": "unsolved goals"
+        }
+      ],
+      "required_markers": [
+        "⊢ False"
+      ],
+      "fixture_error_lines": {
+        "4": "  KN.Energy.mass_energy_eq_zero 1 1 0 0 1 (by norm_num) (by norm_num)"
+      }
+    },
+    {
+      "source": "validation/controls_energy/RejectNoOriginalHorizon.lean",
+      "source_sha256": "398021b8b5d68946d534037a7af7127510031479e424e4df68b0985e60ca7d5c",
+      "expected": "reject",
+      "exit_code": 1,
+      "log": "controls_energy_RejectNoOriginalHorizon.log",
+      "archived_log_sha256": "1534ad3b0db6e41dfca8dde51ae8113bfc5e8e1e9954e68b9dead1393857716d",
+      "diagnostics": [
+        {
+          "source": "validation/controls_energy/RejectNoOriginalHorizon.lean",
+          "line": 15,
+          "column": 20,
+          "category": "Tactic `assumption` failed"
+        },
+        {
+          "source": "validation/controls_energy/RejectNoOriginalHorizon.lean",
+          "line": 15,
+          "column": 34,
+          "category": "Tactic `assumption` failed"
+        }
+      ],
+      "required_markers": [
+        "HorizonRegular",
+        "(-2 * 1) high",
+        "(-1) low"
+      ],
+      "fixture_error_lines": {
+        "15": "  exact ⟨hsH,hsL,by assumption,by assumption,hoH,hoL⟩"
+      }
+    },
+    {
+      "source": "validation/controls_energy/RejectUnboundedAngularAverage.lean",
+      "source_sha256": "6e8d908065b5e9f5dfc53fb09b93656af61030af5ce944a367ca90e7b4925e8f",
+      "expected": "reject",
+      "exit_code": 1,
+      "log": "controls_energy_RejectUnboundedAngularAverage.log",
+      "archived_log_sha256": "83ee18d5cb8cf8e8efe3e5e02aaf63ebce05e4e95e8ef64391536ede88d9cd4e",
+      "diagnostics": [
+        {
+          "source": "validation/controls_energy/RejectUnboundedAngularAverage.lean",
+          "line": 4,
+          "column": 71,
+          "category": "unsolved goals"
+        }
+      ],
+      "required_markers": [
+        "⊢ False"
+      ],
+      "fixture_error_lines": {
+        "4": "  KN.Energy.B_strict_positive 0 1 1 3 100 (by norm_num) (by norm_num) (by norm_num)"
+      }
+    },
+    {
+      "source": "validation/controls_energy/RejectUnsignedSpin.lean",
+      "source_sha256": "4927d3edfa3ca46e3ceba2a0c6c2aac9470bacf9b714bb37fafa4e8372d8393c",
+      "expected": "reject",
+      "exit_code": 1,
+      "log": "controls_energy_RejectUnsignedSpin.log",
+      "archived_log_sha256": "562a774c984d2a711c77a6bd0e7a23361d88c8d20ca6ecdafe85b5e5dc50a225",
+      "diagnostics": [
+        {
+          "source": "validation/controls_energy/RejectUnsignedSpin.lean",
+          "line": 4,
+          "column": 81,
+          "category": "unsolved goals"
+        }
+      ],
+      "required_markers": [
+        "⊢ False"
+      ],
+      "fixture_error_lines": {
+        "4": "  have h := KN.ChargedRadial.physical_fourier_coefficients b hQ m 0 omega lam x (by norm_num)"
+      }
+    },
+    {
+      "source": "validation/controls_energy/RejectVanishingCorrectionDenominator.lean",
+      "source_sha256": "29970fd0ae0c41384debc2673da1e163dbd8eaf86199aeef27ec0f4b2f782077",
+      "expected": "reject",
+      "exit_code": 1,
+      "log": "controls_energy_RejectVanishingCorrectionDenominator.log",
+      "archived_log_sha256": "a2aaf305a75b7b3dd8c1877a3ecc611e44452d379d1d19ac4d2132d21c914b3e",
+      "diagnostics": [
+        {
+          "source": "validation/controls_energy/RejectVanishingCorrectionDenominator.lean",
+          "line": 10,
+          "column": 52,
+          "category": "unsolved goals"
+        }
+      ],
+      "required_markers": [
+        "⊢ False"
+      ],
+      "fixture_error_lines": {
+        "10": "    continuous_const contDiff_const contDiff_const (by norm_num) (by intros; simp)"
+      }
+    },
+    {
+      "source": "validation/controls_energy/RejectWrongWeightDomain.lean",
+      "source_sha256": "b90b24356140a08fab034f2e67e426e04c44e7ca6fb95ad69100940e5e4b2a8f",
+      "expected": "reject",
+      "exit_code": 1,
+      "log": "controls_energy_RejectWrongWeightDomain.log",
+      "archived_log_sha256": "389d3f6afa4092df17e804057182f80ab5814ad522eb556604e6997cfff9f720",
+      "diagnostics": [
+        {
+          "source": "validation/controls_energy/RejectWrongWeightDomain.lean",
+          "line": 4,
+          "column": 52,
+          "category": "unsolved goals"
+        }
+      ],
+      "required_markers": [
+        "⊢ False"
+      ],
+      "fixture_error_lines": {
+        "4": "  (KN.Energy.weights_positive 0 (-1) (by norm_num) (by norm_num)).1"
+      }
+    },
+    {
+      "source": "validation/controls_energy/SignedChargeAndSpin.lean",
+      "source_sha256": "9c68dd3e51ba20815431ddd2e7572fc1fa432302bcc7d2babf010c51da6eb3c6",
+      "expected": "pass",
+      "exit_code": 0,
+      "log": "controls_energy_SignedChargeAndSpin.log",
+      "archived_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "diagnostics": [],
+      "required_markers": [],
+      "fixture_error_lines": {}
+    },
+    {
+      "source": "validation/controls_kerr/PositiveControls.lean",
+      "source_sha256": "053123ca56c6f5a8baeeda11aa7526461daec181e3a20b4cc9162ac366308a2e",
+      "expected": "pass",
+      "exit_code": 0,
+      "log": "controls_kerr_PositiveControls.log",
+      "archived_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "diagnostics": [],
+      "required_markers": [],
+      "fixture_error_lines": {}
+    },
+    {
+      "source": "validation/controls_kerr/RejectHorizonAsNonSpecial.lean",
+      "source_sha256": "84e6304ea992326a56c00420398ad7ec5225c5a89293942b2aa7fc0344bb847b",
+      "expected": "reject",
+      "exit_code": 1,
+      "log": "controls_kerr_RejectHorizonAsNonSpecial.log",
+      "archived_log_sha256": "57892f8717b614c3f3bc0e8229449df340104d16ce23908b0c9bcff0ec421061",
+      "diagnostics": [
+        {
+          "source": "validation/controls_kerr/RejectHorizonAsNonSpecial.lean",
+          "line": 7,
+          "column": 39,
+          "category": "Type mismatch"
+        }
+      ],
+      "required_markers": [
+        "HorizonRegular",
+        "NonSpecialIngoing"
+      ],
+      "fixture_error_lines": {
+        "7": "    NonSpecialIngoing b m s omega R := h"
+      }
+    },
+    {
+      "source": "validation/controls_kerr/RejectPositiveWhiting.lean",
+      "source_sha256": "95c1b5550ed2e466c090f515a41eafa6e70a9937de906898c2dfce99ba75b0fd",
+      "expected": "reject",
+      "exit_code": 1,
+      "log": "controls_kerr_RejectPositiveWhiting.log",
+      "archived_log_sha256": "83812fd6616fb85672d97bdcc8602e3417a4984a7979404f01b1f3391e0dea58",
+      "diagnostics": [
+        {
+          "source": "validation/controls_kerr/RejectPositiveWhiting.lean",
+          "line": 5,
+          "column": 55,
+          "category": "unsolved goals"
+        }
+      ],
+      "required_markers": [
+        "⊢ False"
+      ],
+      "fixture_error_lines": {
+        "5": "  External.whiting_negative_spin_non_special b hQ 0 1 (by norm_num)"
+      }
+    },
+    {
+      "source": "validation/controls_kerr/RejectResonantFuchs.lean",
+      "source_sha256": "8b8199c072abdfc0822b6625f6901c579934634c04771a2cc46c27599ceea478",
+      "expected": "reject",
+      "exit_code": 1,
+      "log": "controls_kerr_RejectResonantFuchs.log",
+      "archived_log_sha256": "e1137dd566db561b5ca4b6fa032a1ca45e1af4e15766dfc9bedd3fcf96741e59",
+      "diagnostics": [
+        {
+          "source": "validation/controls_kerr/RejectResonantFuchs.lean",
+          "line": 8,
+          "column": 58,
+          "category": "unsolved goals"
+        }
+      ],
+      "required_markers": [
+        "⊢ False"
+      ],
+      "fixture_error_lines": {
+        "8": "  (fun _ _ => analyticAt_const) (fun _ _ => one_ne_zero) (by norm_num)"
+      }
+    },
+    {
+      "source": "validation/controls_kerr/RejectSeparatedAsFullField.lean",
+      "source_sha256": "d4156a02636972b9aa7ca51be7596a7ef5a86612271f2a42fb1a135567d900fc",
+      "expected": "reject",
+      "exit_code": 1,
+      "log": "controls_kerr_RejectSeparatedAsFullField.log",
+      "archived_log_sha256": "e3d272c3131f5e100c777210b8196a6aeec025997e9ad2816b3f40ceedc8b502",
+      "diagnostics": [
+        {
+          "source": "validation/controls_kerr/RejectSeparatedAsFullField.lean",
+          "line": 13,
+          "column": 54,
+          "category": "Application type mismatch"
+        }
+      ],
+      "required_markers": [
+        "AngularH",
+        "ℝ → ℂ",
+        "kerr_separated_exclusion"
+      ],
+      "fixture_error_lines": {
+        "13": "  kerr_separated_exclusion b hQ m s omega 0 hs homega F F hF hF heq hh ho"
+      }
+    },
+    {
+      "source": "validation/controls_kerr/RejectZeroLeadingCoefficient.lean",
+      "source_sha256": "5259bd8583dc7ce17e546131dac205be11c522c7bdd51841d77b1c6a5b753449",
+      "expected": "reject",
+      "exit_code": 1,
+      "log": "controls_kerr_RejectZeroLeadingCoefficient.log",
+      "archived_log_sha256": "5df8438243585c015295cd09740be6749cf9f07a8e56e1d2101232566f4a8ee4",
+      "diagnostics": [
+        {
+          "source": "validation/controls_kerr/RejectZeroLeadingCoefficient.lean",
+          "line": 7,
+          "column": 2,
+          "category": "unsolved goals"
+        }
+      ],
+      "required_markers": [
+        "⊢ False"
+      ],
+      "fixture_error_lines": {
+        "7": "  · norm_num"
+      }
+    },
+    {
+      "source": "validation/controls_radial/BoundaryWithoutEquation.lean",
+      "source_sha256": "be4eccc6546879b7db098a5ab276232f4763e0a3dd1b6270202135085d66c516",
+      "expected": "reject",
+      "exit_code": 1,
+      "log": "controls_radial_BoundaryWithoutEquation.log",
+      "archived_log_sha256": "d4c6e0c92c79e67225f47ad0679a73f28dca434ce809cf372f244cf10c691b70",
+      "diagnostics": [
+        {
+          "source": "validation/controls_radial/BoundaryWithoutEquation.lean",
+          "line": 12,
+          "column": 2,
+          "category": "Type mismatch"
+        }
+      ],
+      "required_markers": [
+        "OriginalSelectedPair",
+        "→ EqOn",
+        "charged_original_eigenmode_exclusion"
+      ],
+      "fixture_error_lines": {
+        "12": "  exact charged_original_eigenmode_exclusion positive b hQ m omega lam hw u v hu hg he y z hy hz ho"
+      }
+    },
+    {
+      "source": "validation/controls_radial/MissingDelta.lean",
+      "source_sha256": "19e5f27d760f4c93c6a31485c46b5dbe2a86b4ff3db3b4ede33d0b1cafeca69c",
+      "expected": "reject",
+      "exit_code": 1,
+      "log": "controls_radial_MissingDelta.log",
+      "archived_log_sha256": "b9686a339d71aabf5911d3c50c5c43d4b49a866c2a41e050f78280579fc540ed",
+      "diagnostics": [
+        {
+          "source": "validation/controls_radial/MissingDelta.lean",
+          "line": 5,
+          "column": 2,
+          "category": "Type mismatch"
+        }
+      ],
+      "required_markers": [
+        "derivative_zeroExtension",
+        "+ deltaValue 0 1",
+        "but is expected to have type"
+      ],
+      "fixture_error_lines": {
+        "5": "  exact derivative_zeroExtension 0 (fun _ => (1:ℂ)) contDiff_const"
+      }
+    },
+    {
+      "source": "validation/controls_radial/OneChiralBlock.lean",
+      "source_sha256": "e561e513dd2ea6cde90dc1aa01a3a039499aa08d0a907bd3b8277b1b912489dd",
+      "expected": "reject",
+      "exit_code": 1,
+      "log": "controls_radial_OneChiralBlock.log",
+      "archived_log_sha256": "bc256b4c070c9dc6452030c5aa251e3231d83a31fb3ceca1a744b72ffe4d2ec8",
+      "diagnostics": [
+        {
+          "source": "validation/controls_radial/OneChiralBlock.lean",
+          "line": 7,
+          "column": 54,
+          "category": "Application type mismatch"
+        }
+      ],
+      "required_markers": [
+        "(sourceTransform positive b r t u).1 = 0",
+        "sourceTransform positive b r t u = 0"
+      ],
+      "fixture_error_lines": {
+        "7": "  exact sourceTransform_zero positive b hQ hr ht hp u hz"
+      }
+    },
+    {
+      "source": "validation/controls_radial/PoleAsNonresonant.lean",
+      "source_sha256": "cf0f3e9022ffcbf9a7ab9d4647aed5ce17ddf4574347ea1fa1693e7cc0b2fe2e",
+      "expected": "reject",
+      "exit_code": 1,
+      "log": "controls_radial_PoleAsNonresonant.log",
+      "archived_log_sha256": "fc5d29bba6d5a6afcd893191b2328a557e2cbc7a7f46cdab883329509fff8121",
+      "diagnostics": [
+        {
+          "source": "validation/controls_radial/PoleAsNonresonant.lean",
+          "line": 9,
+          "column": 62,
+          "category": "unsolved goals"
+        }
+      ],
+      "required_markers": [
+        "finitePartAt r (-1)",
+        "⊢ False"
+      ],
+      "fixture_error_lines": {
+        "9": "  exact finitePartAt_exterior_injective r (-1) (by norm_num) (by norm_num) f v hf hv he hz"
+      }
+    },
+    {
+      "source": "validation/controls_radial/Positive.lean",
+      "source_sha256": "2ea90a3cf6eb1d47b090924764d724a713434f46d60577fb9a97635d737024aa",
+      "expected": "pass",
+      "exit_code": 0,
+      "log": "controls_radial_Positive.log",
+      "archived_log_sha256": "39d4270c0ebb415510f4c979dc9b0ea0726ec497c9dac43919f149af442a8dd9",
+      "diagnostics": [],
+      "required_markers": [],
+      "fixture_error_lines": {}
+    },
+    {
+      "source": "validation/controls_radial/SwappedHorizonWeight.lean",
+      "source_sha256": "8b32527e44ac22aa11dfce543f6eccdfa2cc3f9b8f4c11bc5216aa8510c881cb",
+      "expected": "reject",
+      "exit_code": 1,
+      "log": "controls_radial_SwappedHorizonWeight.log",
+      "archived_log_sha256": "8ad422a8aa6aec6e488b9bb58674e0eddfff53e972e1b09fa7a006299c120503",
+      "diagnostics": [
+        {
+          "source": "validation/controls_radial/SwappedHorizonWeight.lean",
+          "line": 13,
+          "column": 94,
+          "category": "Application type mismatch"
+        }
+      ],
+      "required_markers": [
+        "HorizonRegular",
+        "3 * spinSign positive / 4",
+        "- 1 / 2"
+      ],
+      "fixture_error_lines": {
+        "13": "  exact charged_original_eigenmode_exclusion positive b hQ m omega lam hw u v hu hg he y z hy hz ho hp"
+      }
+    },
+    {
+      "source": "validation/controls_radial/WrongDeltaSign.lean",
+      "source_sha256": "f1c51859212c88596dcf961fdcb496834bc3be84e22e23742a62a46560c1a15e",
+      "expected": "reject",
+      "exit_code": 1,
+      "log": "controls_radial_WrongDeltaSign.log",
+      "archived_log_sha256": "a3997ab3172e86a61e7ef93b0e008532b603dd1d0a819c57e09b31080eac7c76",
+      "diagnostics": [
+        {
+          "source": "validation/controls_radial/WrongDeltaSign.lean",
+          "line": 7,
+          "column": 2,
+          "category": "Type mismatch"
+        }
+      ],
+      "required_markers": [
+        "corrected_zeroExtension_second",
+        "+ deltaValue 0 (1 / 1)",
+        "- deltaValue 0 (1 / 1)"
+      ],
+      "fixture_error_lines": {
+        "7": "  exact corrected_zeroExtension_second 0 (fun _ => 0) (fun _ => 1) (fun _ => 1)"
+      }
+    }
+  ],
+  "negative_classifier_selftest_rejections": 125
+}

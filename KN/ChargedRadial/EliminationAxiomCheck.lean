@@ -1,0 +1,4 @@
+import KN.ChargedRadial.PhysicalElimination
+#print axioms KN.ChargedRadial.derivative_mulComplexDist
+#print axioms KN.ChargedRadial.distribution_division_free_third_order
+#print axioms KN.ChargedRadial.physical_supported_pair_elimination

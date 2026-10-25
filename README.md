@@ -43,4 +43,3 @@ Original math/Lean audit source identity: `dd09e7f6962f7e09b083a46d942083773b4c7
 The original C002 paper, Dot internal three audits and independent Codex/Pro mathematical–Lean audits are covered in the provenance notes. The original Pro reproducibility ZIP was lost after successful archival verification; its report and verification receipt were retained. No replacement ZIP is claimed to be that lost archive.
 
 No authorship, institutional affiliation or open-source license has been invented for this release. Bibliographic and licensing decisions should be made explicitly by the repository owner.
-

@@ -1,0 +1,165 @@
+KN.Physics.radiative_mode_exclusion (b : KN.Background) (m : ℤ) (omega : ℂ) (homega : LT.lt.{0} 0 omega.im)
+  (raw : ℝ → ℝ → KN.Physics.RadiativeCurvatureMaxwell) (h : KN.Physics.PublishedPhysicalNecessaryData b m omega raw)
+  (r θ : ℝ) :
+  LT.lt.{0} b.rPlus r →
+    Membership.mem.{0, 0} (Set.Icc.{0} 0 Real.pi) θ →
+      ∀ (i : KN.Physics.RadiativeComponent), Eq.{1} (KN.Physics.radiativeValue b r θ (raw r θ) i) 0
+KN.Physics.physical_mode_exclusion.{u_1} (b : KN.Background) (m : ℤ) (omega : ℂ) (homega : LT.lt.{0} 0 omega.im)
+  {P : Type u_1} (entry : KN.Physics.PublishedEinsteinMaxwellEntry.{u_1} b m omega P) (p : P)
+  (hp : KN.Physics.PublishedEinsteinMaxwellEntry.smoothOutgoingMode.{u_1} entry p) (r θ : ℝ) :
+  LT.lt.{0} b.rPlus r →
+    Membership.mem.{0, 0} (Set.Icc.{0} 0 Real.pi) θ →
+      ∀ (i : KN.Physics.RadiativeComponent),
+        Eq.{1}
+          (KN.Physics.radiativeValue b r θ (KN.Physics.PublishedEinsteinMaxwellEntry.curvatureMaxwell.{u_1} entry p r θ)
+            i)
+          0
+KN.Angular.original_source_exclusion (positive : Bool) (b : KN.Background) (hQ : Ne.{1} b.Q 0) (m : ℤ) (omega : ℂ)
+  (homega : LT.lt.{0} 0 omega.im) (U : KN.Angular.OriginalSourceField positive b m omega)
+  (hs : KN.Physics.PublishedChiralSystem positive b m omega U.components) (r : ℝ) :
+  LT.lt.{0} b.rPlus r → Set.EqOn.{0, 0} (U.components r) 0 (Set.Ioo.{0} 0 Real.pi)
+KN.Angular.full_field_exclusion (b : KN.Background) (hQ : Ne.{1} b.Q 0) (σ : ℝ) (hσ : Eq.{1} σ 1 ∨ Eq.{1} σ (-1))
+  (m : ℤ) (ω : ℂ) (hω : LT.lt.{0} 0 ω.im) (Z : KN.Angular.FullField b hQ σ hσ m ω) :
+  Set.EqOn.{0, 0} Z.field 0 (Set.Ioi.{0} b.rPlus)
+KN.Kerr.kerr_full_field_exclusion (b : KN.Background) (hQ : Eq.{1} b.Q 0) (m s : ℤ) (omega : ℂ)
+  (hs : Eq.{1} s 1 ∨ Eq.{1} s 2 ∨ Eq.{1} s (-1) ∨ Eq.{1} s (-2)) (homega : LT.lt.{0} 0 omega.im)
+  (F : ℝ → ↥KN.Kerr.AngularH) (hF : ContDiffOn.{0, 0, 0} ℝ (↑Top.top.{0}) F (Set.Ioi.{0} b.rPlus))
+  (heq : KN.Kerr.FullFieldEquation b m s omega F) (hhor : KN.Boundary.HorizonRegular.{0} b m omega (Neg.neg.{0} ↑s) F)
+  (hout : KN.Boundary.Outgoing.{0} b m omega F) (r : ℝ) : Membership.mem.{0, 0} (Set.Ioi.{0} b.rPlus) r → Eq.{1} (F r) 0
+structure KN.Physics.PublishedPhysicalNecessaryData (b : KN.Background) (m : ℤ) (omega : ℂ)
+  (raw : ℝ → ℝ → KN.Physics.RadiativeCurvatureMaxwell) : Prop
+number of parameters: 4
+fields:
+  KN.Physics.PublishedPhysicalNecessaryData.axis_continuity : ∀ (i : KN.Physics.RadiativeComponent) (r : ℝ),
+      LT.lt.{0} b.rPlus r →
+        ContinuousOn.{0, 0} (fun θ => KN.Physics.radiativeValue b r θ (raw r θ) i) (Set.Icc.{0} 0 Real.pi)
+  KN.Physics.PublishedPhysicalNecessaryData.charged : Ne.{1} b.Q 0 →
+      ∃ plus minus phantom,
+        KN.Physics.PublishedChiralSystem Bool.true b m omega plus.components ∧
+          KN.Physics.PublishedChiralSystem Bool.false b m omega minus.components ∧
+            KN.Physics.PhantomIdentification b raw phantom plus.components minus.components
+  KN.Physics.PublishedPhysicalNecessaryData.kerr : Eq.{1} b.Q 0 →
+      ∃ F,
+        KN.Physics.KerrRadiativeNecessarySystem b m omega F ∧
+          ∀ (i : KN.Physics.RadiativeComponent) (r : ℝ),
+            LT.lt.{0} b.rPlus r →
+              ContinuousOn.{0, 0} (fun θ => KN.Physics.radiativeValue b r θ (raw r θ) i) (Set.Ioo.{0} 0 Real.pi) ∧
+                ↑↑(F i r) =ᵐ[KN.Kerr.sphericalMeasure] fun θ => KN.Physics.radiativeValue b r θ (raw r θ) i
+constructor:
+  KN.Physics.PublishedPhysicalNecessaryData.mk {b : KN.Background} {m : ℤ} {omega : ℂ}
+    {raw : ℝ → ℝ → KN.Physics.RadiativeCurvatureMaxwell}
+    (axis_continuity :
+      ∀ (i : KN.Physics.RadiativeComponent) (r : ℝ),
+        LT.lt.{0} b.rPlus r →
+          ContinuousOn.{0, 0} (fun θ => KN.Physics.radiativeValue b r θ (raw r θ) i) (Set.Icc.{0} 0 Real.pi))
+    (charged :
+      Ne.{1} b.Q 0 →
+        ∃ plus minus phantom,
+          KN.Physics.PublishedChiralSystem Bool.true b m omega plus.components ∧
+            KN.Physics.PublishedChiralSystem Bool.false b m omega minus.components ∧
+              KN.Physics.PhantomIdentification b raw phantom plus.components minus.components)
+    (kerr :
+      Eq.{1} b.Q 0 →
+        ∃ F,
+          KN.Physics.KerrRadiativeNecessarySystem b m omega F ∧
+            ∀ (i : KN.Physics.RadiativeComponent) (r : ℝ),
+              LT.lt.{0} b.rPlus r →
+                ContinuousOn.{0, 0} (fun θ => KN.Physics.radiativeValue b r θ (raw r θ) i) (Set.Ioo.{0} 0 Real.pi) ∧
+                  ↑↑(F i r) =ᵐ[KN.Kerr.sphericalMeasure] fun θ => KN.Physics.radiativeValue b r θ (raw r θ) i) :
+    KN.Physics.PublishedPhysicalNecessaryData b m omega raw
+structure KN.Physics.PublishedEinsteinMaxwellEntry.{u_1} (b : KN.Background) (m : ℤ) (omega : ℂ) (P : Type u_1) :
+  Type u_1
+number of parameters: 4
+fields:
+  KN.Physics.PublishedEinsteinMaxwellEntry.curvatureMaxwell.{u_1} : P → ℝ → ℝ → KN.Physics.RadiativeCurvatureMaxwell
+  KN.Physics.PublishedEinsteinMaxwellEntry.smoothOutgoingMode.{u_1} : P → Prop
+  KN.Physics.PublishedEinsteinMaxwellEntry.necessary.{u_1} : ∀ (p : P),
+      KN.Physics.PublishedEinsteinMaxwellEntry.smoothOutgoingMode.{u_1} self p →
+        KN.Physics.PublishedPhysicalNecessaryData b m omega
+          (KN.Physics.PublishedEinsteinMaxwellEntry.curvatureMaxwell.{u_1} self p)
+constructor:
+  KN.Physics.PublishedEinsteinMaxwellEntry.mk.{u_1} {b : KN.Background} {m : ℤ} {omega : ℂ} {P : Type u_1}
+    (curvatureMaxwell : P → ℝ → ℝ → KN.Physics.RadiativeCurvatureMaxwell) (smoothOutgoingMode : P → Prop)
+    (necessary :
+      ∀ (p : P), smoothOutgoingMode p → KN.Physics.PublishedPhysicalNecessaryData b m omega (curvatureMaxwell p)) :
+    KN.Physics.PublishedEinsteinMaxwellEntry.{u_1} b m omega P
+'KN.Physics.radiative_mode_exclusion' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u},
+ KN.Analysis.External.fourier_laplace_coordinate,
+ KN.Analysis.External.fourier_laplace_derivative,
+ KN.Analysis.External.fourier_laplace_regular_integral,
+ KN.Analysis.External.fourier_laplace_single_valued,
+ KN.Analysis.External.selfAdjoint_nonreal_surjective.{u_1},
+ KN.Angular.External.hintz_2026_v1_lemma1_zero_frequency,
+ KN.Angular.External.mityagin_siegl_2025_theorem_2_2_p2.{u_1},
+ KN.Angular.Jacobi.dlmf_18_9_15,
+ KN.Angular.Jacobi.dlmf_18_9_3,
+ KN.Angular.Jacobi.dlmf_18_9_4,
+ KN.Angular.Jacobi.dlmf_18_9_5,
+ KN.Angular.Jacobi.dlmf_18_9_5_symmetric,
+ KN.Angular.Jacobi.orthonormal_complete,
+ KN.Angular.Jacobi.regular_differential_equation,
+ KN.Angular.Jacobi.regular_memLp,
+ KN.Angular.Jacobi.regular_smooth,
+ KN.ChargedRadial.External.canonical_power_calculus,
+ KN.ChargedRadial.External.smooth_halfline_extension,
+ KN.Kerr.External.fuchs_smooth_halfline_classification,
+ KN.Kerr.External.regular_adjoint_eigenfunction,
+ KN.Kerr.External.spherical_spectral_data,
+ KN.Kerr.External.whiting_negative_spin_non_special]
+'KN.Physics.physical_mode_exclusion' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u},
+ KN.Analysis.External.fourier_laplace_coordinate,
+ KN.Analysis.External.fourier_laplace_derivative,
+ KN.Analysis.External.fourier_laplace_regular_integral,
+ KN.Analysis.External.fourier_laplace_single_valued,
+ KN.Analysis.External.selfAdjoint_nonreal_surjective.{u_1},
+ KN.Angular.External.hintz_2026_v1_lemma1_zero_frequency,
+ KN.Angular.External.mityagin_siegl_2025_theorem_2_2_p2.{u_1},
+ KN.Angular.Jacobi.dlmf_18_9_15,
+ KN.Angular.Jacobi.dlmf_18_9_3,
+ KN.Angular.Jacobi.dlmf_18_9_4,
+ KN.Angular.Jacobi.dlmf_18_9_5,
+ KN.Angular.Jacobi.dlmf_18_9_5_symmetric,
+ KN.Angular.Jacobi.orthonormal_complete,
+ KN.Angular.Jacobi.regular_differential_equation,
+ KN.Angular.Jacobi.regular_memLp,
+ KN.Angular.Jacobi.regular_smooth,
+ KN.ChargedRadial.External.canonical_power_calculus,
+ KN.ChargedRadial.External.smooth_halfline_extension,
+ KN.Kerr.External.fuchs_smooth_halfline_classification,
+ KN.Kerr.External.regular_adjoint_eigenfunction,
+ KN.Kerr.External.spherical_spectral_data,
+ KN.Kerr.External.whiting_negative_spin_non_special]
+'KN.Angular.original_source_exclusion' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u},
+ KN.Analysis.External.fourier_laplace_coordinate,
+ KN.Analysis.External.fourier_laplace_derivative,
+ KN.Analysis.External.fourier_laplace_regular_integral,
+ KN.Analysis.External.fourier_laplace_single_valued,
+ KN.Analysis.External.selfAdjoint_nonreal_surjective.{u_1},
+ KN.Angular.External.hintz_2026_v1_lemma1_zero_frequency,
+ KN.Angular.External.mityagin_siegl_2025_theorem_2_2_p2.{u_1},
+ KN.Angular.Jacobi.dlmf_18_9_15,
+ KN.Angular.Jacobi.dlmf_18_9_3,
+ KN.Angular.Jacobi.dlmf_18_9_4,
+ KN.Angular.Jacobi.dlmf_18_9_5,
+ KN.Angular.Jacobi.dlmf_18_9_5_symmetric,
+ KN.Angular.Jacobi.orthonormal_complete,
+ KN.Angular.Jacobi.regular_differential_equation,
+ KN.Angular.Jacobi.regular_memLp,
+ KN.Angular.Jacobi.regular_smooth,
+ KN.ChargedRadial.External.canonical_power_calculus,
+ KN.ChargedRadial.External.smooth_halfline_extension]
+'KN.Kerr.kerr_full_field_exclusion' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u},
+ KN.Analysis.External.selfAdjoint_nonreal_surjective.{u_1},
+ KN.Angular.External.mityagin_siegl_2025_theorem_2_2_p2.{u_1},
+ KN.Kerr.External.fuchs_smooth_halfline_classification,
+ KN.Kerr.External.regular_adjoint_eigenfunction,
+ KN.Kerr.External.spherical_spectral_data,
+ KN.Kerr.External.whiting_negative_spin_non_special]

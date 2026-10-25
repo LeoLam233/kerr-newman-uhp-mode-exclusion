@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-25",
+  "checks": {
+    "release_source_diff": {
+      "exit_code": 0,
+      "output": {
+        "status": "PASS",
+        "frozen_source_id": "dd09e7f6962f7e09b083a46d942083773b4c734821e9d8012dca8387d6c665ff",
+        "release_source_id": "94941a2ca5ea758755436c8add8daf44542ad1934fd0562a2d52542db376703e",
+        "frozen_files": 342,
+        "changed": [
+          "README.md",
+          "validation/run_controls.py"
+        ],
+        "new_source_scope_files": [],
+        "lean_and_manuscript_unchanged": true
+      }
+    },
+    "runner_static_and_archived_replay": {
+      "exit_code": 0,
+      "output": {
+        "static_regressions": "PASS",
+        "archived_case_replay_count": 30,
+        "note": "No native Lean execution in this environment"
+      }
+    }
+  },
+  "native_lean_run": "NOT_RUN in Chat container: lean/lake unavailable; delegated to Codex before publication",
+  "codex_evidence_sha256": "b63abf88234062d5430cfe09eff26b1e24dc1b976c907567b6195596980cfb33",
+  "pro_archive_sha256_historical_only": "9eb22090523da917e8d2c0e38556b83c0caf9faf1c84e0bb2aecdbe6a7ac9c97"
+}

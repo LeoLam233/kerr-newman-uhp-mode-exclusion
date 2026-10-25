@@ -1,0 +1,23 @@
+{
+  "status": "publication_derivative",
+  "freeze_source_id": "dd09e7f6962f7e09b083a46d942083773b4c734821e9d8012dca8387d6c665ff",
+  "release_source_id": "94941a2ca5ea758755436c8add8daf44542ad1934fd0562a2d52542db376703e",
+  "original_file_count": 342,
+  "changed_tracked_source_files": {
+    "README.md": {
+      "old_sha256": "ffb62d4e9f7fba70d1babc79fe85e6e32f3e8a12f0b5e8584629b859cfed54b3",
+      "new_sha256": "7c82999442668476fe3e093359f9b63ddaada6dbca6a37e2ca8c828ab4125fb6"
+    },
+    "validation/run_controls.py": {
+      "old_sha256": "706a6eae0fadeee6895639ee0c92574a83752d4f2bc376446962cde5dc2e0675",
+      "new_sha256": "aa1c228d0020bf7e2e767e725cb5814413f5a4ff938bc6982981b375f427e91a"
+    }
+  },
+  "changed_lean_files": [],
+  "changed_manuscript_files": [],
+  "notes": [
+    "Auxiliary negative-control filter fix only functional change in 342-file audited project.",
+    "Repository README replacement is nonmathematical; COVERAGE.md itself was preserved.",
+    "New docs/provenance/release_checks are additive and outside original source-identity selection."
+  ]
+}

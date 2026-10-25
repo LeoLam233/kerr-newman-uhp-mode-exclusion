@@ -1,0 +1,11 @@
+--- frozen/validation/run_controls.py
++++ release/validation/run_controls.py
+@@ -19,7 +19,7 @@
+ env = os.environ.copy()
+ env['PATH'] = str(a.lean_bin_dir.resolve()) + os.pathsep + env.get('PATH','')
+ positive = {'Positive','PositiveControls','Counterexamples','SignedChargeAndSpin'}
+-forbidden = ['unknown module', 'object file', 'unknown package', 'file not found', 'failed to synthesize instance']
++forbidden = ['unknown module', 'object file', 'unknown package', 'file not found', 'failed to read file', 'failed to import', 'no such file or directory', 'could not find module', 'cannot find module', 'failed to synthesize instance']
+ records=[]
+ for src in sorted((root/'validation').glob('controls_*/*.lean')):
+     rel = src.relative_to(root).as_posix()

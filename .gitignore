@@ -1,0 +1,15 @@
+.lake/
+*.olean
+*.olean.private
+*.olean.server
+*.ilean
+*.trace
+__pycache__/
+*.py[cod]
+.DS_Store
+*.log
+*.tmp
+runtime/
+work/
+worktree/
+*.part
