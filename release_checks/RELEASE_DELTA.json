@@ -1,12 +1,12 @@
 {
-  "status": "publication_derivative",
+  "status": "readable_editorial_publication_derivative",
   "freeze_source_id": "dd09e7f6962f7e09b083a46d942083773b4c734821e9d8012dca8387d6c665ff",
-  "release_source_id": "94941a2ca5ea758755436c8add8daf44542ad1934fd0562a2d52542db376703e",
+  "release_source_id": "cf36b09e9965ec5d54a1eb17e0344df43eb7f5aa0adf2c5314a38c2cace9c047",
   "original_file_count": 342,
   "changed_tracked_source_files": {
     "README.md": {
       "old_sha256": "ffb62d4e9f7fba70d1babc79fe85e6e32f3e8a12f0b5e8584629b859cfed54b3",
-      "new_sha256": "7c82999442668476fe3e093359f9b63ddaada6dbca6a37e2ca8c828ab4125fb6"
+      "new_sha256": "123a5f225bf474143631585b71e1903d55999d9ffe68426f78c7e33d05787c5f"
     },
     "validation/run_controls.py": {
       "old_sha256": "706a6eae0fadeee6895639ee0c92574a83752d4f2bc376446962cde5dc2e0675",
@@ -16,8 +16,14 @@
   "changed_lean_files": [],
   "changed_manuscript_files": [],
   "notes": [
-    "Auxiliary negative-control filter fix only functional change in 342-file audited project.",
-    "Repository README replacement is nonmathematical; COVERAGE.md itself was preserved.",
-    "New docs/provenance/release_checks are additive and outside original source-identity selection."
-  ]
+    "All original Lean, manuscript, external interface and dependency-pin bytes remain unchanged.",
+    "README features the complete reader edition; the existing auxiliary diagnostic repair is retained.",
+    "Readable PDF and TeX are additive manuscript members; root readable Markdown and correspondence are independently hash-bound by the editorial receipt and complete Git tree.",
+    "Legacy source_identity selection now contains 344 files. Prior source receipts remain historical evidence and are not represented as fresh execution on this tree."
+  ],
+  "previous_publication_source_id": "94941a2ca5ea758755436c8add8daf44542ad1934fd0562a2d52542db376703e",
+  "added_source_scope_files": {
+    "manuscript/C002_READABLE.pdf": "3e19b2b061885a148aa460768e0ce0373912df5e292adba50f1efeba29b75edc",
+    "manuscript/C002_READABLE.tex": "f60572a72e70beceb3d91a70f95b6cec9736902ef0dd0f49a431e0bec67129d3"
+  }
 }

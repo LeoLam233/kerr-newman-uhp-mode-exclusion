@@ -1,0 +1,1545 @@
+# Upper-half-plane radiative mode exclusion for subextremal Kerr–Newman black holes
+
+**Reader-friendly edition of C002 v1.0**
+
+**Abstract.** We prove upper-half-plane radiative mode exclusion
+for the linearized Einstein–Maxwell equations on every strictly
+subextremal, asymptotically flat Kerr–Newman black hole. For each fixed
+azimuthal number and frequency with positive imaginary part, outgoing
+modes satisfying the regular axis and future-horizon conditions have
+vanishing gravitational and electromagnetic radiative data. For nonzero
+charge, the proof treats the full coupled first-order radiative PDE
+system, using complex angular generalized-root completeness, a
+division-free radial reduction, a distributional horizon extension, and
+a coercive transformed energy identity. The Kerr case is closed by a
+full-field spectral reduction and a spin-reversal lemma that covers
+exceptional horizon frequencies without assuming a nonzero leading
+horizon coefficient. The result concerns radiative modes and does not
+assert a decay theorem or a classification of nonradiative gauge and
+parameter perturbations.
+
+## Structure of the argument
+
+For nonzero charge, the proof passes from the physical first-order systems to a finite angular root space, then to a radial pair. A division-free differential equation and a homogeneous horizon extension make a Fourier–Laplace transform possible. Angular form estimates and the two transformed endpoint bounds turn the equation into a positive energy identity. Transform injectivity then recovers vanishing of the full charged field.
+
+For zero charge, the canonical spin-bundle angular operator extracts a separated Kerr mode from a full field. Negative spins are excluded by the classical ingoing/outgoing theorem. The explicit spin-reversal identity transfers positive spins to that boundary class, including exceptional horizon frequencies.
+
+The eight main sections follow this progression. Equation numbers agree with C002 v1.0, so the complete calculation can be read consecutively or checked against the original manuscript.
+
+## Contents
+
+- [1. Introduction and theorem](#1-introduction-and-theorem)
+
+- [2. Source system and transformations](#2-source-system-and-transformations)
+
+- [3. Complex angular analysis](#3-complex-angular-analysis)
+
+- [4. Full PDE reduction at defective angular frequencies](#4-full-pde-reduction-at-defective-angular-frequencies)
+
+- [5. A radial equation without scalar division](#5-a-radial-equation-without-scalar-division)
+
+- [6. Distributional horizon extension](#6-distributional-horizon-extension)
+
+- [7. Complex Laplace transform and positive energy](#7-complex-laplace-transform-and-positive-energy)
+
+- [8. The zero-charge Kerr case](#8-the-zero-charge-kerr-case)
+
+## 1. Introduction and theorem
+
+<a id="introduction-and-theorem"></a>
+
+The separation of the coupled gravitational and electromagnetic
+radiative perturbation equations on subextremal Kerr–Newman backgrounds
+[H] makes it possible to study the non-real mode problem directly.
+The real-frequency exclusion established in [H] does not by itself
+exclude frequencies with positive imaginary part. Here we prove that
+exclusion for the radiative Einstein–Maxwell variables in the complete
+strictly subextremal parameter domain. The zero-charge Kerr case is
+treated separately, using the negative-spin version of the classical
+separated Kerr result [W, AMPW] and an explicit spin-reversal
+argument that includes exceptional horizon frequencies. Rigorous linear
+stability is known in the restricted weak-charge and slow-rotation
+regime [He]; earlier numerical studies of the coupled system
+[DGS] and calculations of separated Kerr–Newman quasinormal modes
+[DCH] provide complementary evidence in broader parameter ranges.
+Recent work on radiative amplitudes and algebraic separation [M, Z]
+supplies further context. We use geometrized units throughout.
+
+### 1.1. Parameters and the exterior geometry
+
+<a id="readable-parameters"></a>
+
+The argument is carried out for one azimuthal number and one frequency at a time. Strict subextremality supplies two distinct horizons and a positive exterior gap; the sign of the charge is retained throughout.
+
+Fix real parameters
+$$
+M>0,\qquad a^2+Q^2<M^2,
+$$
+ an integer $m$, and a frequency $\omega\in\mathbb C$ with
+$\gamma:=\operatorname{Im}\omega>0$. Time and azimuthal dependence is
+$e^{-i\omega t+im\phi}$.
+
+### 1.2. Radiative conclusion and physical boundary conditions
+
+<a id="readable-theorem"></a>
+
+The conclusion concerns four radiative curvature–Maxwell quantities, identified explicitly in (8a). The boundary class is part of the theorem: regularity is imposed in the ingoing tetrad at the future horizon and on the spin bundle at the axis, while the condition at infinity selects the outgoing solution.
+
+**Theorem (upper-half-plane radiative mode exclusion).** Every
+outgoing smooth linearized Einstein–Maxwell perturbation on this
+asymptotically flat Kerr–Newman exterior has vanishing gravitational
+and electromagnetic radiative data.
+
+For $Q\ne0$, the stronger sufficient assertion proved below is that
+both entire four-component radiative first-order PDE systems in Hintz
+[H], with their prescribed axis, future-horizon and infinity
+conditions, have only the zero solution. Their equivalence to the
+transformed equations used here is algebraic and valid for complex
+frequency. For $Q=0$, the Kerr section below combines the classical
+separated Kerr mode-stability theorem in its negative-spin form [W,
+AMPW] with a spin-reversal lemma and an explicit full-PDE coverage
+argument.
+
+Put
+$$
+\Delta=r^2-2Mr+a^2+Q^2,\quad r_\pm=M\pm\delta,\quad
+ \delta=\sqrt{M^2-a^2-Q^2}>0,
+$$
+
+$$
+K=-(r^2+a^2)\omega+am,\qquad
+ H(r)=\exp\left(i\int_{2r_+}^r K(s)/\Delta(s)\,ds\right).
+$$
+ Future-horizon regularity means that $H^{-1}\Delta^b\psi_b$,
+$H^{-1}\Delta^2k$, $H^{-1}\Delta s$, $H^{-1}\Delta^{-2}n$, and
+$H^{-1}\Delta^{-1}\ell$ are smooth up to $r=r_+$, using the
+variables of the relevant spin system. This is smoothness in the regular
+ingoing tetrad. At infinity, $H$ times each original radiative
+variable has polynomial conormal bounds, meaning that every fixed
+collection of $r\partial_r$ and angular derivatives has a polynomial
+bound. The physical outgoing branch decays exponentially because
+$\gamma>0$. Axis smoothness means smoothness of the relevant
+spin-weighted sections.
+
+The theorem concerns radiative mode stability. Classification of
+nonradiating perturbations as gauge and parameter variations, decay,
+nonlinear stability, extremal backgrounds, and bounds uniform to
+extremality are outside this claim.
+
+## 2. Source system and transformations
+
+<a id="source-system-and-transformations"></a>
+
+### 2.1. Constants and the regular PDE
+
+<a id="constants-and-the-regular-pde"></a>
+
+#### 2.1.1. The coupled operator and its chiral symmetries
+
+<a id="readable-source-algebra"></a>
+
+We first put the charged equations into a form that separates radial differentiation from angular operator theory. The two signs describe two complete four-component systems. The angular symmetries will later pair their chiral root spaces without imposing a product ansatz on the field.
+
+Assume $Q\ne0$, and define
+$$
+d=M^2-Q^2,\quad \eta=\frac{2Q^2}{d},\quad
+ h=\eta+2=\frac{2M^2}{d},\quad
+ \kappa=\eta+1=\frac{M^2+Q^2}{d},
+$$
+
+$$
+c=\frac{2MQ}{d},\qquad \beta=\frac{3M}{2Q},\qquad
+ \xi_0=\eta\omega,\qquad \widetilde K=K-\xi_0\Delta .
+$$
+ Then
+<a id="eq-1"></a>
+
+$$
+\kappa^2-c^2=1,\qquad \beta c=\frac{3h}{2}.
+ \tag{1}
+$$
+ Let $\sigma\in\{+1,-1\}$ distinguish the positive and negative spin
+systems. The exact transformed equation [H, equations (7)–(8)] is
+
+<a id="eq-2"></a>
+
+$$
+\sqrt\Delta\,\partial_r Z
+ =(\mathcal A_\sigma(\omega)+R_0\mathcal I+R_1\mathcal J)Z,
+ \tag{2}
+$$
+ where
+<a id="eq-3"></a>
+
+$$
+R_0=\frac{3\Delta'}{4\sqrt\Delta}
+       -i\sigma\sqrt\Delta\left(\frac K\Delta-\eta\omega\right),\qquad
+ R_1=-\sigma\frac{2\omega Q(Mr-Q^2)}d+i\beta.
+ \tag{3}
+$$
+ The constant Hermitian matrices obey
+<a id="eq-4"></a>
+
+$$
+\mathcal I^2=\mathcal J^2=1,\quad
+ \mathcal I\mathcal J=-\mathcal J\mathcal I,\quad
+ \{\mathcal A,\mathcal I\}=\{\mathcal A,\mathcal J\}=0.
+ \tag{4}
+$$
+ Thus $\mathcal S=\mathcal I\mathcal J$ has eigenvalues $i,-i$ and
+commutes with $\mathcal A$. On $L^2((0,\pi),d\theta;\mathbb C^4)$,
+
+<a id="eq-5"></a>
+
+$$
+\mathcal A_\sigma=
+ \begin{pmatrix}i\partial_\theta&i\Theta\\-i\Theta&-i\partial_\theta\end{pmatrix},
+ \qquad \Theta=\begin{pmatrix}W&T\\T&-W\end{pmatrix},
+ \tag{5}
+$$
+
+$$
+W=\frac32\cot\theta+\sigma m\csc\theta-\sigma a\kappa\omega\sin\theta,
+ \qquad T=-\beta-\sigma ac\omega\cos\theta.
+$$
+ One may take
+$\mathcal I=\left(\begin{smallmatrix}0&I_2\\I_2&0\end{smallmatrix}\right)$
+and
+$\mathcal J=\left(\begin{smallmatrix}0&-J_2\\J_2&0\end{smallmatrix}\right)$,
+where
+$J_2=\left(\begin{smallmatrix}0&-1\\1&0\end{smallmatrix}\right)$. All
+relations are complex algebraic identities; no conjugation of $\omega$
+is used.
+
+### 2.2. Invertibility and boundary fidelity
+
+<a id="invertibility-and-boundary-fidelity"></a>
+
+#### 2.2.1. An invertible change of physical variables
+
+<a id="readable-invertibility"></a>
+
+The determinant calculation below establishes invertibility on the open exterior. We then record the horizon weights separately, so that the radial reduction keeps the physical boundary conditions.
+
+Write $\rho=r+ia\cos\theta$, $\rho^*=r-ia\cos\theta$, and
+<a id="eq-6"></a>
+
+$$
+X=\begin{pmatrix}
+ Q(\sqrt\Delta+a\sin\theta)/\rho&-i(M-Q^2/\rho)\\
+ i(M-Q^2/\rho^*)&Q(\sqrt\Delta-a\sin\theta)/\rho^*
+ \end{pmatrix}.
+ \tag{6}
+$$
+ Its determinant is $-d\ne0$. The source transformation is
+$$
+y_\pm^{(+)}=\Delta^{5/4}\sqrt{\sin\theta}
+ \begin{pmatrix}\psi_2\pm i\Delta^{-1/2}\psi_1\\
+ -2Q(k\pm i\Delta^{-1/2}s)\end{pmatrix},
+$$
+
+$$
+y_\pm^{(-)}=\Delta^{-3/4}\sqrt{\sin\theta}
+ \begin{pmatrix}\psi_{-2}\mp i\Delta^{1/2}\psi_{-1}\\
+ 2Q(n\mp i\Delta^{1/2}\ell)\end{pmatrix},
+$$
+ and $Z=(z_+,z_-)^t$, where $z_+=\operatorname{adj}(X)y_+$,
+$z_-=X^*y_-$. The matrix $X$ depends on the real background and
+coordinates, not frequency. All factors are invertible in the open
+exterior. The substitutions in the original first-order equations give
+(2) without dividing by any coefficient of a second-order elimination.
+
+#### 2.2.2. Transporting the horizon and infinity conditions
+
+<a id="readable-boundary-weights"></a>
+
+The two radial symmetry projections carry different horizon powers. These powers remain visible when finite angular projections are taken later.
+
+Let $\Pi_\pm=(1\pm\mathcal I)/2$. The source transformation gives
+<a id="eq-7"></a>
+
+$$
+\begin{array}{c|cc}
+ &\Pi_+Z&\Pi_-Z\\ \hline
+ \sigma=+1&H\Delta^{-1/4}C^\infty&H\Delta^{-3/4}C^\infty\\
+ \sigma=-1&H\Delta^{3/4}C^\infty&H\Delta^{5/4}C^\infty .
+\end{array}
+ \tag{7}
+$$
+ Smoothness may be interpreted into the angular Hilbert space.
+Physical axis regularity implies this condition and the maximal angular
+domain at each interior radius. At infinity the transformed components
+are $H^{-1}$ times polynomially bounded functions; the remaining
+transformation factors have polynomial bounds.
+
+#### 2.2.3. Returning to the radiative invariants
+
+<a id="readable-invariants"></a>
+
+The transformed equations use a convenient tetrad gauge. The following identities identify the quantities in the theorem and explain why exclusion of both charged systems gives the radiative conclusion.
+
+For fixed $Q\ne0$, the phantom tetrad gauge is legitimate because the
+background Maxwell component $\Phi_1=Q/(2\rho^{*2})$ is nowhere zero
+in the exterior. The radiative variables are the rescaled phantom-gauge
+Weyl components
+<a id="eq-8"></a>
+
+$$
+\psi_2=\Psi_0^{(1)},\quad
+ \psi_1=\sqrt2\rho^*\Psi_1^{(1)},\quad
+ \psi_{-1}=\rho^{*3}\Psi_3^{(1)}/\sqrt2,\quad
+ \psi_{-2}=\rho^{*4}\Psi_4^{(1)}.
+ \tag{8}
+$$
+ The exact radiative data meant in the theorem are
+$\mathcal G_\pm,\mathcal E_\pm$ of [M, equations (5.1)–(5.2)]:
+<a id="eq-8a"></a>
+
+$$
+\begin{aligned}
+ \mathcal G_+&=\delta\Psi_0,&
+ \mathcal G_-&=\rho^{*4}\delta\Psi_4,\\
+ \mathcal E_+&=\frac{\rho^*}{3M}
+     (Q\delta\Psi_1-3\rho^{*2}\Psi_2^{(0)}\delta\Phi_0),\\
+ \mathcal E_-&=\frac{\rho^{*3}}{3M}
+     (Q\delta\Psi_3-3\rho^{*2}\Psi_2^{(0)}\delta\Phi_2).
+\end{aligned}
+ \tag{8a}
+$$
+ The mixed combinations are invariant under the infinitesimal null
+rotations used to impose phantom gauge. In that gauge,
+<a id="eq-8b"></a>
+
+$$
+\mathcal G_\pm=\psi_{\pm2},\qquad
+ \mathcal E_+=\frac{Q}{3\sqrt2M}\psi_1,\qquad
+ \mathcal E_-=\frac{\sqrt2Q}{3M}\psi_{-1}.
+ \tag{8b}
+$$
+ Thus proving the four $\psi$'s vanish proves vanishing of these
+well-defined radiative data. At finite charge, $\mathcal E_\pm$
+contain both curvature and Maxwell perturbations. Their zero-charge
+limits in a nonsingular tetrad are $\delta\Phi_0$ and
+$\rho^{*2}\delta\Phi_2$, respectively. These identifications follow from the local algebraic relations at the fixed complex frequency. We use the
+one-way implication from physical perturbations to the necessary
+first-order systems. Reconstruction of arbitrary subsystem solutions is
+not an assumption.
+
+## 3. Complex angular analysis
+
+<a id="complex-angular-analysis"></a>
+
+### 3.1. Fixed domain and exact zero-frequency spectrum
+
+<a id="fixed-domain-and-exact-zero-frequency-spectrum"></a>
+
+#### 3.1.1. The first-order angular realization
+
+<a id="readable-angular-domain"></a>
+
+The angular analysis fixes an operator domain, identifies the static spectrum, and obtains a nonnegative form for genuine complex-frequency eigenvectors. The first-order domain controls the endpoint behavior in each step.
+
+On $\ker(\mathcal S-i)$, a constant unitary identification gives
+<a id="eq-9"></a>
+
+$$
+B_\sigma(\omega)=B_0+\omega V,\qquad
+ B_0=i\sigma_3\partial_\theta+g\sigma_2-\beta\sigma_1,\qquad
+ g=\frac32\cot\theta+\sigma m\csc\theta,
+ \tag{9}
+$$
+
+$$
+V=-\sigma a(\kappa\sin\theta\,\sigma_2+c\cos\theta\,\sigma_1).
+$$
+ Here $\sigma_j$ are the Hermitian Pauli matrices; the scalar system
+sign $\sigma$ is distinct.
+
+The compactly supported smooth realization of $B_0$ is essentially
+self-adjoint, with maximal distributional $L^2$ domain. This follows
+also from [H, Lemma 1] at zero frequency. The endpoint indicial
+roots are $\pm(3\cos\theta_0/2+\sigma m)$, nonzero half-integers. The
+root at or below $-1/2$ is not square integrable. The deficiency
+integration has zero boundary flux and forces every deficiency vector to
+vanish. The bounded Hermitian multiplier $V$ leaves the operator
+domain fixed at complex $\omega$.
+
+#### 3.1.2. Jacobi functions and the complete static spectrum
+
+<a id="readable-jacobi"></a>
+
+A constant change of basis diagonalizes the square. Jacobi polynomials then describe the scalar eigenspaces. Their first-order images must also satisfy the domain condition.
+
+A constant Hadamard rotation puts $B_0$ in the form
+<a id="eq-10"></a>
+
+$$
+\begin{pmatrix}-\beta&i(\partial_\theta+g)\\
+ i(\partial_\theta-g)&\beta\end{pmatrix}.
+ \tag{10}
+$$
+ Its square minus $\beta^2$ has diagonal entries
+<a id="eq-11"></a>
+
+$$
+L_s=-\partial_\theta^2+
+ \frac{m^2+s^2-\tfrac14+2\sigma ms\cos\theta}{\sin^2\theta}
+ -\frac94,\qquad s=1,2.
+ \tag{11}
+$$
+ Let $A_s=|\sigma m+s|$, $B_s=|\sigma m-s|$. The functions
+<a id="eq-12"></a>
+
+$$
+\sqrt{\sin\theta}(1-\cos\theta)^{A_s/2}
+ (1+\cos\theta)^{B_s/2}P_n^{(A_s,B_s)}(\cos\theta),\qquad n\ge0,
+ \tag{12}
+$$
+ have eigenvalue $\ell(\ell+1)-2$, where $\ell=n+\max(|m|,s)$, by
+the Jacobi differential equation. The change of variable
+$x=\cos\theta$ identifies their norms with Jacobi weighted norms, so
+polynomial density proves completeness. At critical exponent $1/2$,
+the leading coefficient of a potentially nonintegrable first-order image
+cancels. The displayed functions and their first-order images belong to
+the maximal domain. Thus (11) is precisely the square of (10), with the logarithmic second-order boundary branch excluded by the first-order domain.
+
+#### 3.1.3. Paired modes and the unpaired ground branch
+
+<a id="readable-static-branches"></a>
+
+The first-order operator couples the scalar eigenspaces at each common angular level. A possible low angular branch remains unpaired; its sign determines its contribution to the form estimate.
+
+For $\ell\ge\max(|m|,2)$, the off-diagonal part of (10) couples the
+two one-dimensional eigenspaces in (12), giving the complete paired
+spectrum
+<a id="eq-13"></a>
+
+$$
+\nu_{\ell,\pm}=\pm\sqrt{\beta^2+(\ell-1)(\ell+2)}.
+ \tag{13}
+$$
+ If $|m|\le1$, there is additionally one unpaired eigenvalue
+$\nu=-\beta$, with upper component proportional to
+$(\sin\theta)^{3/2}\tan(\theta/2)^{\sigma m}$ and lower component
+zero. There is no unpaired $+\beta$ eigenvalue in this chiral sector.
+Let $P_0$ be that possible rank-one projection. In quadratic-form
+sense on $\operatorname{Dom}B_0$,
+<a id="eq-14"></a>
+
+$$
+T_0:=B_0^2-\beta^2\ge4(1-P_0)\ge0.
+ \tag{14}
+$$
+
+### 3.2. The required nonnegative angular form
+
+<a id="the-required-nonnegative-angular-form"></a>
+
+#### 3.2.1. A form estimate retaining the signed charge
+
+<a id="readable-angular-sign"></a>
+
+The energy equation will involve an auxiliary real coordinate on a negative half-line. The exact static branches give the required form inequality on that entire range.
+
+For real $x\le-h$, set
+<a id="eq-15"></a>
+
+$$
+K_\sigma(x)=B_0^2-\beta^2+\frac c x(B_0-\sigma\beta).
+ \tag{15}
+$$
+ This form is nonnegative for both signs of $Q$ and $\sigma$.
+Indeed, put $q=|Q|/M\in(0,1)$, $b=|\beta|=3/(2q)$. Then
+$|c/x|\le q$, with sign opposite to $\beta$. For $\sigma=-1$, the
+smaller nonzero-branch value is bounded by
+$$
+v^2-b^2-q(v+b),\qquad v\ge\sqrt{b^2+4}.
+$$
+ It increases with $v$, and its endpoint value is
+$$
+\epsilon_q=\frac{5-\sqrt{9+16q^2}}2
+ =\frac{8(1-q^2)}{5+\sqrt{9+16q^2}}>0.
+$$
+ The unpaired branch has value zero. Hence
+<a id="eq-16"></a>
+
+$$
+K_-(x)\ge\epsilon_q(1-P_0).
+ \tag{16}
+$$
+ For $\sigma=+1$, the smaller nonzero-branch value is at least
+$(11-\sqrt{9+16q^2})/2>3$, and the unpaired value is
+$-2\beta c/x=-3h/x>0$. Consequently
+<a id="eq-17"></a>
+
+$$
+K_+(x)\ge-\frac{3h}{x}P_0+
+ \frac{11-\sqrt{9+16q^2}}2(1-P_0)\ge0.
+ \tag{17}
+$$
+ No uniform estimate at the extremal boundary $q=1$ is used.
+
+#### 3.2.2. Complex eigenvalues through real expectations
+
+<a id="readable-angular-expectations"></a>
+
+The separation eigenvalue can be complex. We express its contribution through real expectations of the static operator and its bounded multiplier, using only the first-order domain.
+
+For a normalized genuine eigenvector $B_\sigma(\omega)u=\lambda u$,
+introduce real numbers
+$$
+\begin{gathered}
+ L=\langle u,B_0u\rangle,\quad v=\langle u,Vu\rangle,\quad
+ T=\|B_0u\|^2-\beta^2,\\
+ C=2\operatorname{Re}\langle B_0u,Vu\rangle,\quad D=\|Vu\|^2.
+\end{gathered}
+$$
+ With the inner product conjugate-linear in its first entry,
+<a id="eq-18"></a>
+
+$$
+\lambda=L+\omega v,\qquad
+ \lambda^2=\beta^2+T+\omega C+\omega^2D .
+ \tag{18}
+$$
+ The latter identity is valid using only the first-order domain:
+$$
+\langle B_\sigma(\omega)^*u,B_\sigma(\omega)u\rangle
+ =\lambda\langle B_\sigma(\omega)^*u,u\rangle
+ =\lambda\langle u,B_\sigma(\omega)u\rangle=\lambda^2.
+$$
+ Expanding the left side proves (18). This calculation stays on the first-order domain; it requires neither self-adjointness at complex frequency nor a square-operator domain. The
+Pauli algebra gives
+<a id="eq-19"></a>
+
+$$
+V^2=a^2(c^2+\sin^2\theta)1,\qquad \|V\|=|a|\kappa.
+ \tag{19}
+$$
+ The eigenvector in these expectations is fixed independently of the
+transform coordinate $x$.
+
+### 3.3. Generalized-root completeness
+
+<a id="generalized-root-completeness"></a>
+
+#### 3.3.1. Resolvent bounds and the completeness theorem
+
+<a id="readable-root-completeness"></a>
+
+Finite generalized-root spaces will detect a nonzero angular field. The following bounds verify the Schatten-class and nonreal-ray hypotheses needed for this detection mechanism.
+
+For each fixed $m$, (13) implies that one resolvent of $B_0$, and of
+the full $\mathcal A_0$, belongs to Schatten class $\mathcal S_p$
+for every $p>1$, in particular $\mathcal S_2$. The bounded
+perturbation preserves this property at a sufficiently distant resolvent
+point. If $C_\omega=|\omega|\|\mathcal V\|$, where $\mathcal V$ is
+the full-space frequency multiplier,
+<a id="eq-20"></a>
+
+$$
+\|(\mathcal A(\omega)-z)^{-1}\|
+ \le\frac1{|\operatorname{Im}z|-C_\omega}
+ \quad\text{when }|\operatorname{Im}z|>C_\omega .
+ \tag{20}
+$$
+ The resolvent identity at $z=i(1+2C_\omega)$ gives an actual
+Hilbert–Schmidt resolvent.
+
+The general theorem in Mityagin–Siegl [MS, Theorem 2.2] says that a
+closed densely defined operator with one $\mathcal S_p$ resolvent has
+complete generalized root spaces if its resolvent has polynomial bounds
+on rays with successive gaps strictly less than $\pi/p$. Take $p=2$
+and the eight nonreal rays $\pi/8+j\pi/4$, $j=0,\ldots,7$. Equation
+(20) gives the required bounds at large radius; the gap is
+$\pi/4<\pi/2$. Thus the hypotheses of the completeness theorem hold.
+Completeness is used as a finite-projection detection principle, without a Riesz-basis assumption.
+
+#### 3.3.2. Detection through the adjoint root spaces
+
+<a id="readable-adjoint-detection"></a>
+
+The adjoint completeness statement converts vanishing of every finite spectral projection into vanishing of the full angular vector.
+
+The same argument applies to
+$\mathcal A(\omega)^*=\mathcal A(\overline\omega)$. Therefore, if
+every finite Riesz projection annihilates a vector, that vector is zero,
+because it is orthogonal to the complete generalized root spaces of the
+adjoint. This detection statement replaces any presumed convergent
+expansion in ordinary eigenvectors.
+
+## 4. Full PDE reduction at defective angular frequencies
+
+<a id="full-pde-reduction-at-defective-angular-frequencies"></a>
+
+### 4.1. Finite projections preserving the coupled system
+
+<a id="readable-chiral-projection"></a>
+
+We now begin with the full two-variable PDE field. A useful finite projection must respect both chiral sectors and the radial matrices, including at defective and zero angular eigenvalues.
+
+Let $P_\lambda^+$ be a Riesz projection in the $i$ chiral sector. On
+the two-sector direct sum use
+<a id="eq-21"></a>
+
+$$
+\mathcal P_\lambda=
+ \operatorname{diag}(P_\lambda^+,\mathcal I P_\lambda^+\mathcal I).
+ \tag{21}
+$$
+ It commutes with $\mathcal A,\mathcal I,\mathcal J$ by their
+resolvent identities. This refined pairing avoids double counting if
+both $\lambda,-\lambda$ occur in one sector and works at
+$\lambda=0$. Adjoint-root completeness detects any nonzero full PDE
+solution at some interior radius with such a nonzero finite projection.
+
+### 4.2. Jordan chains and the last nonzero coefficient
+
+<a id="readable-jordan-pair"></a>
+
+Triangular angular action produces a finite system of radial coefficients. We choose the last coefficient that is nonzero as a function of radius; all higher forcing coefficients then vanish identically.
+
+Choose Jordan chains $(\mathcal A-\lambda)u_j=u_{j-1}$, $u_0=0$, in
+the $i$ sector; set $v_j=\mathcal Iu_j$. Then
+<a id="eq-22"></a>
+
+$$
+\begin{gathered}\mathcal Av_j=-\lambda v_j-v_{j-1},\\
+ \mathcal Iu_j=v_j,\quad \mathcal Iv_j=u_j,\\
+ \mathcal Ju_j=iv_j,\quad \mathcal Jv_j=-iu_j .\end{gathered}
+ \tag{22}
+$$
+ The two chiral chains remain independent when $\lambda=0$. If their
+radial coefficients are $p_j,q_j$, equation (2) reads
+<a id="eq-23"></a>
+
+$$
+\begin{gathered}\sqrt\Delta\,p_j'=\lambda p_j+p_{j+1}+(R_0-iR_1)q_j,\\
+ \sqrt\Delta\,q_j'=-\lambda q_j-q_{j+1}+(R_0+iR_1)p_j .\end{gathered}
+ \tag{23}
+$$
+ Choose a chain and its highest index whose pair is not identically
+zero. Higher coefficients vanish identically, leaving a homogeneous
+ordinary two-component radial equation. The coefficient map treats
+$u_j,\mathcal Iu_j$ in the same way and intertwines
+$\mathcal I,\mathcal J$. The finite projections and coefficient maps
+are bounded and independent of radius. They preserve the different
+horizon weights in (7) and the infinity bounds.
+
+Equivalently, use the finite invariant filtration
+$\ker(B-\lambda)^j\oplus\mathcal I\ker(B-\lambda)^j$. The radial
+equation preserves it, and the first nonzero quotient has semisimple
+angular action. This version does not apply an anticommuting angular
+operator to the entire PDE.
+
+### 4.3. The radial pair and its inherited boundary class
+
+<a id="readable-radial-pair"></a>
+
+The resulting homogeneous radial pair is attached to a genuine angular eigenpair and retains two distinct horizon weights. Excluding every such pair will eliminate the original full field.
+
+In the radial basis $Z=z_1(u+\mathcal Iu)-iz_2(u-\mathcal Iu)$, the
+pair is
+<a id="eq-24"></a>
+
+$$
+(\partial_r\mp\Delta^{-1/2}R_0)z_{1/2}
+ =\Delta^{-1/2}(R_1\mp i\lambda)z_{2/1}.
+ \tag{24}
+$$
+ The two horizon powers are $(-1/4,-3/4)$ for positive spin,
+$(3/4,5/4)$ for negative spin, multiplied by $H$. It suffices to
+exclude (24) for every genuine angular eigenpair. No uniform estimate in
+$m,\omega,\lambda$ has been assumed.
+
+## 5. A radial equation without scalar division
+
+<a id="a-radial-equation-without-scalar-division"></a>
+
+### 5.1. Smooth horizon variables
+
+<a id="readable-radial-rescaling"></a>
+
+To avoid division by a coupling coefficient, we keep a first-order pair. The following rescaling makes the horizon coefficients smooth and leads to a polynomial-coefficient equation.
+
+Define
+<a id="eq-25"></a>
+
+$$
+\begin{array}{c|cc}
+ &w&w_\sharp\\ \hline
+ \sigma=+1&
+ \Delta^{3/4}H^{-1}e^{i\eta\omega r}z_2&
+ \Delta^{1/4}H^{-1}e^{i\eta\omega r}z_1\\
+ \sigma=-1&
+ \Delta^{-3/4}H^{-1}e^{i\eta\omega r}z_1&
+ \Delta^{-5/4}H^{-1}e^{i\eta\omega r}z_2 .
+\end{array}
+ \tag{25}
+$$
+ Both functions are smooth at the horizon, and
+<a id="eq-26"></a>
+
+$$
+w'=A w_\sharp,\qquad
+ \Delta w_\sharp'+
+ \left(\frac{1-3\sigma}{2}\Delta'+2i\widetilde K\right)w_\sharp=B w,
+ \tag{26}
+$$
+ where $A=R_1+i\sigma\lambda$, $B=R_1-i\sigma\lambda$. Put
+<a id="eq-27"></a>
+
+$$
+p=\Delta^{-(1+3\sigma)/2}H^2e^{-2i\eta\omega r},\qquad
+ v_r=pw,\qquad z_r=\Delta p w_\sharp .
+ \tag{27}
+$$
+ The subscripts distinguish these radial functions from angular
+expectations. Direct differentiation gives
+<a id="eq-28"></a>
+
+$$
+(\Delta\partial_r+L_r)v_r=A z_r,\qquad z_r'=Bv_r,\qquad
+ L_r=\frac{1+3\sigma}{2}\Delta'-2i\widetilde K .
+ \tag{28}
+$$
+ Since $A'=B'=R_1'$ is constant, two derivatives of the first
+equation, using the second, give
+<a id="eq-29"></a>
+
+$$
+\mathcal E v_r=0,\qquad
+ \mathcal E=
+ \partial_r^2(\Delta\partial_r+L_r)
+ -(R_1^2+\lambda^2)\partial_r-(3R_1-i\sigma\lambda)R_1' .
+ \tag{29}
+$$
+ All coefficients are polynomials of degree at most two in $r$.
+Neither $A^{-1}$ nor $B^{-1}$ is used. Apparent scalar poles
+therefore cause no loss of solutions.
+
+## 6. Distributional horizon extension
+
+<a id="distributional-horizon-extension"></a>
+
+### 6.1. The two horizon exponents
+
+<a id="readable-horizon-exponents"></a>
+
+The radial equation must hold homogeneously after extension across the horizon. The local exponents determine which extension is available.
+
+Write $t=r-r_+$, $d_H=\Delta'(r_+)=2\delta$. Locally
+<a id="eq-30"></a>
+
+$$
+v_r=t^\alpha f(t),\quad z_r=t^{\alpha+1}g(t),\quad f,g\in C^\infty,
+ \qquad
+ \alpha=-\frac{1+3\sigma}{2}+\frac{2iK(r_+)}{d_H}.
+ \tag{30}
+$$
+ Negative spin has $\operatorname{Re}\alpha>1$, positive spin has
+$\operatorname{Re}\alpha>-2$, since
+$\operatorname{Re}(2iK(r_+)/d_H)=2(r_+^2+a^2)\gamma/d_H$.
+
+### 6.2. Generic frequencies
+
+<a id="generic-frequencies"></a>
+
+#### 6.2.1. Homogeneous extension away from the pole
+
+<a id="readable-generic-extension"></a>
+
+The integrable and meromorphic constructions obey the same first-order distributional identities. We establish homogeneity at that level before using the eliminated equation.
+
+For negative spin ordinary zero extension solves (28) distributionally.
+For positive spin with $\alpha\ne-1$, use the canonical meromorphic
+distributions $t_+^\alpha$ and $t_+^{\alpha+1}$, multiplied by
+$f,g$, and joined to the original solution away from the horizon.
+Their only pole in the stated region is $\alpha=-1$. The identities
+<a id="eq-31"></a>
+
+$$
+t\partial_t(t_+^\alpha f)
+ =\alpha t_+^\alpha f+t_+^{\alpha+1}f',\qquad
+ \partial_t(t_+^{\alpha+1}g)
+ =(\alpha+1)t_+^\alpha g+t_+^{\alpha+1}g'
+ \tag{31}
+$$
+ hold by meromorphic continuation from the integrable region,
+including at nonnegative integers. With $\Delta=t(d_H+t)$, the
+residuals in (28) are the canonical extensions of identically vanishing
+smooth coefficient residuals. Thus the extended pair is homogeneous.
+This is an argument at fixed $\omega$, requiring no holomorphic family
+of physical outgoing solutions.
+
+### 6.3. The exceptional positive-spin resonance
+
+<a id="the-exceptional-positive-spin-resonance"></a>
+
+#### 6.3.1. The exceptional frequency and a nonzero denominator
+
+<a id="readable-resonance-denominator"></a>
+
+At the remaining pole, an explicit boundary correction replaces the generic extension. Its denominator is shown to be nonzero using the angular expectation identity and the background inequalities.
+
+The only exceptional negative integer is $\alpha=-1$, at
+<a id="eq-32"></a>
+
+$$
+\omega=\omega_H=\frac{am+id_H/2}{B_+},\qquad
+ B_+=r_+^2+a^2,\qquad \gamma=\frac{\delta}{B_+}.
+ \tag{32}
+$$
+ At this point $L_r(r_+)=d_H$. Define $G_H=2Q(Mr_+-Q^2)/d$. If
+$B(r_+)=0$, then $\lambda=\beta+iG_H\omega$, so
+$\lambda^2-\beta^2=2i\beta G_H\omega-G_H^2\omega^2$. Compare with
+(18), divide by $\omega\ne0$, and take imaginary parts:
+<a id="eq-33"></a>
+
+$$
+0=-\frac{\gamma T}{|\omega|^2}
+       +\gamma(D+G_H^2)-2\beta G_H .
+ \tag{33}
+$$
+ But $T\ge0$, $D\le a^2\kappa^2$, and
+$$
+G_H^2+a^2\kappa^2=a^2+\frac{4Q^2B_+}{d},
+$$
+ so
+<a id="eq-34"></a>
+
+$$
+2\beta G_H-\gamma(G_H^2+a^2\kappa^2)
+ =6M+\delta\left(\frac{6M^2-4Q^2}{d}-\frac{a^2}{B_+}\right)>0.
+ \tag{34}
+$$
+ The first quotient in parentheses is $4+2M^2/d>6$, while
+$a^2/B_+<1$. Both signs of $Q$ are included. This contradicts (33),
+so $B(r_+)\ne0$. The same squared argument would exclude $A(r_+)=0$,
+but that is unnecessary below.
+
+#### 6.3.2. Cancelling the horizon delta source
+
+<a id="readable-delta-correction"></a>
+
+Smoothness of the exterior functions does not alone remove the boundary residual of zero extension. The delta term below cancels that residual exactly.
+
+Here $z_r$ is smooth and $v_r=t^{-1}f$. The equation $z_r'=Bv_r$
+forces $f(0)=0$, so $v_r$ is also smooth. Its zero extension need
+not be homogeneous: $z_r'$ acquires a delta source. The required
+corrected extension is
+<a id="eq-35"></a>
+
+$$
+z_e=1_{[r_+,\infty)}z_r,\qquad
+ v_e=1_{[r_+,\infty)}v_r+
+       \frac{z_r(r_+)}{B(r_+)}\delta_{r_+}.
+ \tag{35}
+$$
+ Since
+$$
+(\Delta\partial_r+L_r)\delta_{r_+}
+ =(-d_H+L_r(r_+))\delta_{r_+}=0,
+$$
+ the first equation of (28) is unchanged. The added term in $Bv_e$
+precisely matches the delta coefficient in $z_e'$. Thus (28), and
+hence (29), hold homogeneously.
+
+This correction is essential: vanishing of the Laurent coefficient alone
+does not remove a finite horizon boundary source. The corrected
+extension is of finite distribution order, supported in
+$[r_+,\infty)$, and agrees with the physical function on the open
+exterior.
+
+## 7. Complex Laplace transform and positive energy
+
+<a id="complex-laplace-transform-and-positive-energy"></a>
+
+### 7.1. Transform equation
+
+<a id="transform-equation"></a>
+
+#### 7.1.1. The transform domain and the interior ray
+
+<a id="readable-laplace-ray"></a>
+
+The supported homogeneous extension has a Fourier–Laplace transform on a specified half-plane. The chosen ray lies strictly inside it, including at the finite endpoint used below.
+
+At infinity the homogeneous extension $v_e$ agrees with
+$e^{-i\eta\omega r}O_{\rm con}(r^C)$, by (25)–(27). Its
+Fourier–Laplace transform
+<a id="eq-36"></a>
+
+$$
+F(\xi)=\langle v_e(r),e^{-i\xi r}\rangle
+ \tag{36}
+$$
+ is holomorphic for $\operatorname{Im}\xi<-\eta\gamma$. The pairing
+is defined by exponential damping and cutoffs; compactly supported
+finite-part or delta terms present no convergence problem. Restrict to
+the interior ray
+<a id="eq-37"></a>
+
+$$
+\xi=\omega x,\qquad -\infty<x<-h,\qquad Y(x)=F(\omega x).
+ \tag{37}
+$$
+ Here $\gamma(x+\eta)<-2\gamma$.
+
+#### 7.1.2. Transforming the ordered polynomial operator
+
+<a id="readable-ordered-transform"></a>
+
+Multiplication and differentiation become noncommuting operations in transform space. Their order in (29) gives the complete coefficient list.
+
+Transform (29) by $\partial_r\mapsto i\xi$, $r\mapsto i\partial_\xi$
+in the correct operator order, then set $\xi=\omega x$. The result is
+
+<a id="eq-38"></a>
+
+$$
+a_xY''+(b_x+i\omega c_x)Y'
+ +(d_0+\omega d_1+\omega^2d_2+i\omega e_x)Y=0,
+ \tag{38}
+$$
+ where
+<a id="eq-39"></a>
+
+$$
+\begin{aligned}
+ a_x&=x(x+\eta)(x+h),&
+ b_x&=x^2-\eta h-3\sigma x(x+h),\\
+ c_x&=2Mx(x+\eta)^2,&
+ e_x&=M(x+\eta)(x-\eta-3\sigma x),\\
+ d_0&=(\beta^2-\lambda^2)x+\tfrac32\sigma h-c\lambda,&
+ d_1&=2amx^2,\\
+ d_2&=-[2a^2+(a^2+Q^2)(x+2\eta)]x^2-Q^2\eta^2x .
+\end{aligned}
+ \tag{39}
+$$
+ The coefficients in (39) follow by applying the distributional
+Fourier substitution to the polynomial radial operator (29), preserving
+the order of multiplication and differentiation.
+
+#### 7.1.3. Divergence form and removal of imaginary transport
+
+<a id="readable-energy-gauge"></a>
+
+An integrating factor puts the real derivative terms in divergence form. A scalar gauge removes imaginary transport and isolates the frequency dependence of the remaining potential.
+
+Set
+<a id="eq-40"></a>
+
+$$
+\mu=x^{-2}(x+\eta)^{-3\sigma},\quad
+ P=\mu a_x=\frac{x+h}{x(x+\eta)^{3\sigma-1}},\quad
+ W_x=\frac{(x+\eta)^{-3\sigma}}x .
+ \tag{40}
+$$
+ Both $P,W_x$ are strictly positive on this interval. With
+$q_x=\mu c_x/2=M(x+\eta)^{2-3\sigma}/x$,
+<a id="eq-41"></a>
+
+$$
+(\mu a_x)'=\mu b_x,\qquad q_x'=\mu e_x,\qquad
+ q_x/P=\frac{M(x+\eta)}{x+h}.
+ \tag{41}
+$$
+ Define
+<a id="eq-42"></a>
+
+$$
+S(x)=M[x-2\log(-x-h)],\qquad Y=e^{-i\omega S}U .
+ \tag{42}
+$$
+ Because $S'=q_x/P$, the imaginary transport disappears:
+<a id="eq-43"></a>
+
+$$
+(PU')'+W_x\left[
+ \beta^2-\lambda^2+\frac{3\sigma h/2-c\lambda}{x}
+ +2am\omega x+\omega^2R(x)\right]U=0,
+ \tag{43}
+$$
+
+<a id="eq-44"></a>
+
+$$
+R(x)=(x+\eta)^2\left(\delta^2-\frac{2M^2}{x+h}\right)
+      +a^2\eta^2-2a^2x .
+ \tag{44}
+$$
+
+### 7.2. The coercive sign
+
+<a id="the-coercive-sign"></a>
+
+#### 7.2.1. The three real coefficients of the potential
+
+<a id="readable-coercive-potential"></a>
+
+We use the same genuine angular eigenvector that produced the radial pair. Its expectation identities give a nonnegative form entering with a minus sign, a real linear term, and a strictly positive quadratic term.
+
+Use the genuine angular eigenvector in (18). The bracket in (43) equals
+
+<a id="eq-45"></a>
+
+$$
+-k_\sigma(x)+\omega l(x)+\omega^2\mathcal B(x),
+ \tag{45}
+$$
+ where
+$$
+k_\sigma=T+\frac c x(L-\sigma\beta)
+       =\langle K_\sigma(x)\rangle\ge0,\qquad
+ l(x)=2amx-C-\frac c x v\in\mathbb R,\qquad
+ \mathcal B=R-D.
+$$
+ For $y=-x-\eta>2$, equation (19) gives the exact identity
+<a id="eq-46"></a>
+
+$$
+\mathcal B(x)=
+ y^2\left(\delta^2+\frac{2M^2}{y-2}\right)
+ +2a^2y-a^2\langle\sin^2\theta\rangle>0 .
+ \tag{46}
+$$
+ These signs hold for every allowed background and actual complex
+angular eigenpair. No complex separation constant is treated as an
+arbitrary real parameter. The real, possibly indefinite coefficient
+$l$ will cancel in the imaginary-part identity.
+
+### 7.3. Endpoint justification
+
+<a id="endpoint-justification"></a>
+
+#### 7.3.1. The finite endpoint
+
+<a id="readable-finite-endpoint"></a>
+
+Before integrating by parts, we check the energy densities and boundary flux. Analyticity of the transform at the finite endpoint combines with the gauge power to give the needed bounds for every positive imaginary frequency.
+
+At $x\uparrow-h$, the Laplace transform is analytic across the
+endpoint, which is strictly inside its holomorphy half-plane. Writing
+$t_x=-x-h$, equation (42) gives
+<a id="eq-47"></a>
+
+$$
+|U|=O(t_x^{2M\gamma}),\qquad
+ |U'|=O(t_x^{2M\gamma-1}).
+ \tag{47}
+$$
+ Here $P\asymp t_x$, $W_x\asymp1$, $\mathcal B\asymp t_x^{-1}$,
+and $k_\sigma,l$ are bounded. The worst energy integrands behave as
+$t_x^{4M\gamma-1}$, which is integrable for every $\gamma>0$. The
+flux $PU'\overline U$ tends to zero as $O(t_x^{4M\gamma})$.
+
+#### 7.3.2. The remote endpoint, including finite parts and deltas
+
+<a id="readable-remote-endpoint"></a>
+
+An explicit representation of the extended distribution controls the remote endpoint. It treats generic finite parts, ordinary integrable functions, and the exceptional delta correction.
+
+At $x\to-\infty$, an explicit finite-part representation gives a
+polynomial bound times $e^{\gamma r_+x}$ for $F(\omega x)$ and each
+fixed derivative. Cut off near the horizon and absorb the cutoff into
+the smooth $f$. For positive spin at a generic frequency, use
+<a id="eq-48a"></a>
+
+$$
+t_+^\alpha f=
+ \frac{\partial_t(t_+^{\alpha+1}f)}{\alpha+1}
+ -\frac{t_+^{\alpha+1}f'}{\alpha+1}.
+ \tag{48a}
+$$
+ Both undifferentiated distributions on the right are integrable since
+$\operatorname{Re}\alpha>-2$. Their absolute Laplace integrals are
+bounded by
+$$
+e^{\gamma r_+x}
+ \int_0^\varepsilon t^{\operatorname{Re}\alpha+1}
+             e^{\gamma xt}\,dt
+ =e^{\gamma r_+x}O(|x|^{-\operatorname{Re}\alpha-2}).
+$$
+ The distributional derivative contributes at most one factor of
+$|x|$. Negative spin is integrable directly; the exceptional extension
+is an ordinary smooth zero extension plus a delta. Inserting $r^j$
+handles each derivative in $x$ by the same argument. The smooth
+outgoing tail begins a positive distance from the horizon and has a
+stronger exponential bound for sufficiently large negative $x$. These explicit estimates give the required bound for each part of the distribution.
+
+The gauge factor has modulus $e^{-\gamma Mx}$ times a power of
+$-x-h$. Thus, after adjusting constants,
+<a id="eq-48"></a>
+
+$$
+|U|+|U'|\le C(1+|x|)^N e^{\gamma(r_+-M)x}
+          =C(1+|x|)^N e^{\gamma\delta x}.
+ \tag{48}
+$$
+ Because $\delta>0$, this decays exponentially. All weights have at
+most polynomial growth at this endpoint. The energy integrals converge
+and the boundary flux is zero, including for the delta correction (35).
+
+### 7.4. Energy identity and injectivity
+
+<a id="energy-identity-and-injectivity"></a>
+
+#### 7.4.1. The positive transformed energy
+
+<a id="readable-energy-identity"></a>
+
+With both endpoint fluxes controlled, we integrate the divergence equation. Multiplication by the conjugate frequency removes the real linear coefficient, whose sign need not be fixed.
+
+Multiply (43) by $\overline U$, integrate, and use the established
+endpoint bounds:
+$$
+-\int P|U'|^2-\int W_x k_\sigma|U|^2
+ +\omega\int W_xl|U|^2
+ +\omega^2\int W_x\mathcal B|U|^2=0 .
+$$
+ Multiplication by $\overline\omega$ and taking imaginary parts
+eliminates the real linear coefficient:
+<a id="eq-49"></a>
+
+$$
+0=\gamma\left[
+  \int P|U'|^2+\int W_x k_\sigma|U|^2
+  +|\omega|^2\int W_x\mathcal B|U|^2\right].
+ \tag{49}
+$$
+ Since $\gamma>0$, $\omega\ne0$, $P,W_x>0$, $k_\sigma\ge0$,
+and $\mathcal B>0$, this forces $U=0$.
+
+#### 7.4.2. Recovering the radial pair and the full charged field
+
+<a id="readable-injectivity"></a>
+
+The vanishing transformed field is carried back through holomorphic continuation, Fourier injectivity, and the first-order pair. The recovery of the partner also covers a possible isolated zero of its affine coupling.
+
+The transform $F$ vanishes on an interior complex ray, hence on its
+entire half-plane by the identity theorem. On any sufficiently low
+horizontal line it is the Fourier transform of an exponentially damped
+tempered distribution. Fourier injectivity gives $v_e=0$, in
+particular $v_r=0$ in the open exterior. Since $p\ne0$, $w=0$;
+(26) then gives $Aw_\sharp=0$. The affine polynomial $A$ is not
+identically zero because $Q\omega M/d\ne0$. Its possible zero is
+isolated, so continuity gives $w_\sharp=0$ everywhere. The invertible
+transformations give $z_1=z_2=0$.
+
+This contradicts the nonzero pair extracted from any nonzero full PDE
+solution. Both systems (2) vanish, and their invertible source
+transformations imply the radiative conclusion (8a)–(8b) for $Q\ne0$.
+
+## 8. The zero-charge Kerr case
+
+<a id="the-zero-charge-kerr-case"></a>
+
+### 8.1. The negative-spin input and the full-field problem
+
+<a id="readable-kerr-input"></a>
+
+The zero-charge sector has its own angular and radial equations. We state the separated negative-spin theorem precisely and then obtain a mode in its boundary class from a general Kerr field.
+
+For $Q=0$, the background Maxwell field vanishes. Linearization then
+separates the gravitational and Maxwell radiative equations into the
+standard Teukolsky equations of spins $s\in\{-2,-1,1,2\}$. The Kerr
+mode-stability input used below is Whiting's upper-half-plane theorem
+[W] in the separated form recalled in [AMPW, Introduction and
+Section II.A.3, Definition 3], restricted to negative spins
+$s=-1,-2$: a regular-axis separated solution which is the
+*non-special ingoing Frobenius solution* at the horizon and
+outgoing at infinity must vanish. Positive spins will be reduced to
+negative spins by the spin-reversal lemma below. A general
+$e^{-i\omega t+im\phi}F(r,\theta)$ need not initially be a product, so
+the full-field reduction is also proved here.
+
+### 8.2. The canonical angular operator and its root spaces
+
+<a id="readable-kerr-domain"></a>
+
+The angular domain selects regular spin-weighted sections at both poles. This domain persists under the complex-frequency bounded perturbation and supports the finite-projection argument.
+
+On the fixed-$m$ subspace of $L^2((0,\pi),\sin\theta\,d\theta)$,
+define the positive angular convention
+<a id="eq-50"></a>
+
+$$
+\begin{aligned}T_s(\omega)={}&
+ -\frac1{\sin\theta}\partial_\theta(\sin\theta\,\partial_\theta)
+ +\frac{(m+s\cos\theta)^2}{\sin^2\theta}\\
+ & -a^2\omega^2\cos^2\theta+2as\omega\cos\theta .\end{aligned}
+ \tag{50}
+$$
+ The zero-frequency realization $T_s(0)$ is the canonical
+self-adjoint spin-bundle operator restricted to this azimuthal subspace.
+Its orthonormal spin-weighted spherical harmonics have eigenvalues
+<a id="eq-51"></a>
+
+$$
+\Lambda_\ell=\ell(\ell+1)-s^2,\qquad
+ \ell\ge\max(|m|,|s|).
+ \tag{51}
+$$
+ The domain imposes the regular spin-weighted branch. This distinction
+is essential when $m\pm s=0$: a logarithmic scalar solution is also in
+$L^2(\sin\theta\,d\theta)$, but it is excluded by the
+canonical/Friedrichs domain. We do not use the maximal scalar interval
+domain. Smooth eigenfunctions and generalized eigenfunctions follow from
+elliptic regularity on the spin bundle after addition of the smooth
+potential.
+
+For fixed $\omega$, the last two terms of (50) are a bounded complex
+multiplication operator. Since (51) grows quadratically in $\ell$, a
+fixed-$m$ resolvent of $T_s(0)$ is trace class. The same
+bounded-perturbation and nonreal-ray argument used in (20), now with
+$p=1$, proves generalized-root completeness for $T_s(\omega)$ and
+its adjoint. For example the same eight rays have gaps $\pi/4<\pi$.
+
+### 8.3. Angular and radial separation conventions
+
+<a id="readable-kerr-normalization"></a>
+
+The angular eigenvalue differs from the radial separation constant by a scalar shift. This conversion is kept explicit when the mode is matched to the classical Kerr result.
+
+The canonical eigenvalue $\Lambda$ in (50) is not the
+standard radial separation constant. With
+$K_{\rm std}=(r^2+a^2)\omega-am$, direct separation of the physical
+Teukolsky equation gives
+<a id="eq-52"></a>
+
+$$
+\begin{split}
+0={}&\Delta^{-s}\partial_r(\Delta^{s+1}\partial_r R)
+ +\frac{K_{\rm std}^2-2is(r-M)K_{\rm std}}{\Delta}R\\
+ &+(4is\omega r+s-\Lambda-a^2\omega^2+2am\omega)R .
+\end{split}
+ \tag{52}
+$$
+ Thus the standard radial constant is
+$\Lambda-s+a^2\omega^2-2am\omega$. The fixed-frequency PDE is a sum of
+a radial operator and $-T_s(\omega)$, with precisely this scalar
+shift.
+
+### 8.4. Horizon branches and the spin-reversal identity
+
+<a id="horizon-branches-and-the-spin-reversal-identity"></a>
+
+#### 8.4.1. The horizon-regular conjugated equation
+
+<a id="readable-kerr-conjugation"></a>
+
+A horizon-regular unknown exposes both the indicial roots and the spin-reversal identity. The conjugation below fixes the radial frequency and spin conventions.
+
+For the Kerr background set
+$$
+\Omega_H=\frac{a}{r_+^2+a^2},\qquad
+ \kappa_H=\frac{r_+-r_-}{2(r_+^2+a^2)},\qquad
+ k=\omega-m\Omega_H.
+$$
+ In this section $H'/H=-iK_{\rm std}/\Delta$. Writing
+$R=H\Delta^{-s}f$, direct conjugation of (52) gives
+<a id="eq-53"></a>
+
+$$
+E_sf=0,\qquad E_s=\Delta\partial_r^2+P_s\partial_r+C_s,
+ \tag{53}
+$$
+ with
+$$
+\begin{aligned}
+ P_s&=(1-s)\Delta'-2iK_{\rm std},\\
+ C_s&=2i(2s-1)\omega r-s-\Lambda-a^2\omega^2+2am\omega .
+ \end{aligned}
+$$
+ Indeed, for $\psi=\partial_r\log(H\Delta^{-s})
+=-(iK_{\rm std}+s\Delta')/\Delta$, the first-derivative coefficient
+after conjugation is $2\Delta\psi+(s+1)\Delta'=P_s$. The remaining
+$1/\Delta$ terms cancel against the potential in (52), using
+$\Delta'=2(r-M)$ and $K_{\rm std}'=2\omega r$, leaving the displayed
+$C_s$.
+
+#### 8.4.2. The negative-spin horizon branch
+
+<a id="readable-kerr-negative"></a>
+
+For negative spins, smoothness forces the precise ingoing Frobenius branch required by the external theorem. The second indicial exponent excludes the other branch, including possible logarithmic terms.
+
+**Lemma 8.1 (negative-spin horizon branch).** Let $s\in\{-1,-2\}$
+and $\Lambda\in\mathbb C$. If a nonzero solution of (52) satisfies
+$R\in H\Delta^{-s}C^\infty([r_+,r_++\varepsilon))$, then
+<a id="eq-54"></a>
+
+$$
+R=c\,t^{-s-ik/(2\kappa_H)}(1+O(t)),\qquad
+ t=r-r_+,\quad c\ne0.
+ \tag{54}
+$$
+ In particular, it is the non-special ingoing Frobenius solution
+required by [AMPW, Definition 3].
+
+*Proof.* Write $d_H=r_+-r_->0$, so $\Delta=t(d_H+t)$. The
+indicial roots of (53) for $f$ are
+$$
+0,\qquad k_s=s+\frac{ik}{\kappa_H},\qquad
+ \operatorname{Re}k_s=s-\frac{\gamma}{\kappa_H}<0.
+$$
+ The root $0$ admits a unique analytic solution with a freely chosen
+nonzero constant coefficient. The other independent solution has a
+nonzero $t^{k_s}$ contribution, possibly accompanied by logarithms at
+integral root differences, and cannot be smooth at $t=0$. A nonzero
+smooth $f$ must therefore be a nonzero multiple of the root-$0$
+solution. Since $H=t^{-ik/(2\kappa_H)}$ times a smooth nonvanishing
+factor and $\Delta^{-s}\sim d_H^{-s}t^{-s}$, (54) follows. $\square$
+
+#### 8.4.3. Spin reversal for both positive spins
+
+<a id="readable-kerr-positive"></a>
+
+The reversal must preserve the angular domain, the radial equation and both endpoint conditions, and it must have a nonzero image. These facts are proved below without division by a positive-spin horizon coefficient.
+
+**Lemma 8.2 (spin reversal, including exceptional frequencies).**
+Fix $s\in\{1,2\}$, $m\in\mathbb Z$, and
+$\operatorname{Im}\omega>0$. Let $T_s(\omega)u=\Lambda u$ with
+$u\ne0$ in the canonical angular domain, and let $R\ne0$ solve (52).
+Suppose $R\in H\Delta^{-s}C^\infty([r_+,\infty))$ and $HR$ has
+polynomial conormal bounds at infinity. Set $f=H^{-1}\Delta^sR$, and
+define
+<a id="eq-55"></a>
+
+$$
+\widetilde u(\theta)=u(\pi-\theta),\qquad
+ \widetilde R=H\Delta^s\partial_r^{2s}f.
+ \tag{55}
+$$
+ Then $\widetilde u$ is a canonical spin-$(-s)$ angular
+eigenfunction with eigenvalue $\Lambda$, and $\widetilde R$ is a
+nonzero spin-$(-s)$ radial solution satisfying the same future-horizon
+regularity and outgoing infinity conditions. This holds at every
+frequency in the open upper half-plane, without a nonvanishing horizon
+leading-coefficient assumption.
+
+*Proof.* Reflecting $\theta\mapsto\pi-\theta$ in (50)
+interchanges $T_s(\omega)$ and $T_{-s}(\omega)$ at the same
+$(\omega,m,\Lambda)$. It maps the regular spin-bundle domains into one
+another: the pole exponents $|m+s|$ and $|m-s|$ are exchanged. This
+proves the angular claim, including its domain statement.
+
+##### The radial differential identity.
+
+<a id="readable-kerr-reversal-identity"></a>
+
+The finite coefficient calculation follows from the degrees of the radial coefficients. Every surviving derivative order is checked.
+
+For the radial equation put $n=2s$. Because $\Delta$ and $P_s$ are
+quadratic and $C_s$ is affine in $r$, Leibniz's rule applied to (53)
+yields
+<a id="eq-56"></a>
+
+$$
+\boxed{\quad\partial_r^{2s}E_s
+ = E_{-s}\partial_r^{2s}.\quad}
+ \tag{56}
+$$
+ To verify all coefficients, the coefficient of $\partial_r^{n+1}$
+is $n\Delta'+P_s=P_{-s}$; that of $\partial_r^n$ is
+$$
+\frac{n(n-1)}2\Delta''+nP_s'+C_s=C_{-s};
+$$
+ and the coefficient of $\partial_r^{n-1}$ vanishes since
+$$
+\frac{n(n-1)}2P_s''+nC_s'
+ =2i\omega n(2s-n)=0.
+$$
+ There are no further lower-order terms. Thus $g=\partial_r^{2s}f$
+satisfies $E_{-s}g=0$, and the conjugation (53) for $-s$ proves that
+$\widetilde R=H\Delta^sg$ solves the spin-$(-s)$ version of (52).
+Since $f$ is smooth at the horizon, so is $g$. This establishes
+$\widetilde R\in H\Delta^sC^\infty$, including the resonant Frobenius
+cases.
+
+##### Nonzero image and the outgoing condition.
+
+<a id="readable-kerr-reversal-infinity"></a>
+
+The outgoing exponential controls the differentiated leading term. This establishes both nonvanishing of the reversed solution and preservation of its infinity bounds.
+
+It remains to exclude a zero image and check infinity. For $\gamma>0$,
+the two radial exponential types are distinct, and polynomial conormal
+control of $HR$ selects the outgoing solution. The outgoing asymptotic
+expansion of (52), including differentiated expansions, gives
+<a id="eq-57"></a>
+
+$$
+f=e^{2i\omega r}r^{4iM\omega-1}
+       \bigl(c_0+O(r^{-1})\bigr),\qquad c_0\ne0.
+ \tag{57}
+$$
+ Here $H=e^{-i\omega r}r^{-2iM\omega}
+(\text{constant}+O(r^{-1}))$. Consequently
+<a id="eq-58"></a>
+
+$$
+\partial_r^{2s}f=(2i\omega)^{2s}
+ e^{2i\omega r}r^{4iM\omega-1}
+       \bigl(c_0+O(r^{-1})\bigr).
+ \tag{58}
+$$
+ Since $\omega\ne0$, this is not identically zero. Furthermore
+$H\widetilde R=H^2\Delta^s\partial_r^{2s}f$ has polynomial conormal
+bounds and belongs to the spin-$(-s)$ outgoing branch. Thus
+$\widetilde R$ is nonzero, with the stated boundary conditions.
+$\square$
+
+#### 8.4.4. The angular admissibility inequality
+
+<a id="readable-kerr-admissibility"></a>
+
+The angular eigenfunction extracted from the Kerr field supplies the sign condition required in the classical normalization.
+
+For an angular eigenfunction the usual Kerr admissibility inequality is
+also automatic in our normalization:
+<a id="eq-59"></a>
+
+$$
+\operatorname{Im}(\overline\omega\Lambda)\|u\|^2
+ =-\gamma\left(\langle u,T_s(0)u\rangle
+             +a^2|\omega|^2\|\cos\theta\,u\|^2\right)<0,
+ \tag{59}
+$$
+ since the canonical $T_s(0)$ has eigenvalues
+$\ell(\ell+1)-s^2\ge |s|>0$ for $s=\pm1,\pm2$.
+
+### 8.5. Completion of the full Kerr field argument
+
+<a id="completion-of-the-full-kerr-field-argument"></a>
+
+#### 8.5.1. From the full field to a forbidden separated mode
+
+<a id="readable-kerr-full"></a>
+
+Finite root projections and the last nonzero Jordan coefficient now reduce the full Kerr PDE to the separated radial equation while preserving the physical boundary class.
+
+Any nonzero full PDE field has a nonzero finite Riesz projection by
+adjoint-root completeness. On a Jordan chain
+$(T_s-\Lambda)u_j=u_{j-1}$, its highest nonzero radial coefficient
+solves (52) homogeneously. The associated bottom angular vector is a
+genuine regular eigenfunction of (50). Projections and coefficient maps
+are bounded and independent of $r$, so they preserve the scalar
+spin-dependent horizon factor $H\Delta^{-s}$, the smooth horizon
+coefficient and the outgoing infinity exponential with polynomial
+bounds. At infinity, the two radial asymptotic exponentials are distinct
+for $\gamma>0$; the polynomial bound after multiplication by $H$
+selects the outgoing one. The resulting nonzero separated mode has a
+regular angular eigenfunction, weighted-smooth horizon data and outgoing
+infinity behavior. If $s=-1,-2$, Lemma 8.1 identifies its horizon
+behavior with the non-special ingoing Frobenius branch, so Whiting's
+negative-spin theorem excludes it. If $s=1,2$, Lemma 8.2 produces a
+nonzero separated outgoing mode of spin $-s$ satisfying the same
+negative-spin theorem. Either possibility is a contradiction. Descending
+the finite Jordan chain and invoking adjoint-root completeness, the
+entire fixed-frequency Kerr radiative field vanishes, including for
+$a=0$.
+
+#### 8.5.2. Matching the classical theorem and concluding
+
+<a id="readable-kerr-conventions"></a>
+
+The final convention conversion records exactly which negative-spin classical result is applied, directly or after spin reversal.
+
+**Separation conventions.** The radial equation is the physical
+Teukolsky equation [T], and its symmetrized operator formulation is
+also discussed in [PV]. The canonical angular eigenvalue $\Lambda$
+in (50) differs by a scalar shift from the radial separation constants
+common in the literature. The conversion between (50)–(52) and the AMPW
+normalization $\widetilde R=\Delta^{s/2}R$ is specified after [AMPW,
+equation (7)]:
+$\Lambda_{\rm AMPW}+2am\omega-a^2\omega^2=A_{\rm Whiting}+s$, where
+$A_{\rm Whiting}=\Lambda-s$ in our convention. Only the negative-spin,
+non-special form of the Kerr theorem is invoked. In particular the
+argument does not divide by a positive-spin horizon
+Teukolsky–Starobinsky coefficient or require a positive-spin horizon
+leading coefficient to be nonzero.
+
+This completes the zero-charge sector, and hence the theorem.
+$\square$
+
+## References
+
+<a id="ref-H"></a>
+
+**[H]** P. Hintz, “Perturbations of Kerr–Newman black holes:
+separation and mode stability,” arXiv:2609.33661v1 (2026).
+[https://arxiv.org/abs/2609.33661](https://arxiv.org/abs/2609.33661).
+
+<a id="ref-MS"></a>
+
+**[MS]** B. Mityagin and P. Siegl, “Local form
+subordination without a power decay and a criterion of Riesz
+basesness,” *Bol. Soc. Mat. Mex.* **31**, 111 (2025),
+Theorem 2.2. [https://doi.org/10.1007/s40590-025-00751-7](https://doi.org/10.1007/s40590-025-00751-7).
+
+<a id="ref-W"></a>
+
+**[W]** B. F. Whiting, “Mode stability of the Kerr black hole,”
+*J. Math. Phys.* **30**, 1301–1305 (1989).
+[https://doi.org/10.1063/1.528308](https://doi.org/10.1063/1.528308).
+
+<a id="ref-AMPW"></a>
+
+**[AMPW]** L. Andersson, S. Ma, C. Paganini, and B. F. Whiting,
+“Mode stability on the real axis,” *J. Math. Phys.* **58**,
+072501 (2017). [https://arxiv.org/abs/1607.02759](https://arxiv.org/abs/1607.02759).
+
+<a id="ref-TdC"></a>
+
+**[TdC]** R. Teixeira da Costa, “Mode stability for the
+Teukolsky equation on extremal and subextremal Kerr spacetimes,”
+*Commun. Math. Phys.* **378**, 705–781 (2020).
+[https://doi.org/10.1007/s00220-020-03796-z](https://doi.org/10.1007/s00220-020-03796-z).
+
+<a id="ref-PV"></a>
+
+**[PV]** O. Petersen and A. Vasy, “Dual modes in Kerr
+spacetimes and the Whiting transform: Mode stability revisited,”
+arXiv:2608.26034 (2026). [https://arxiv.org/abs/2608.26034](https://arxiv.org/abs/2608.26034).
+
+<a id="ref-T"></a>
+
+**[T]** S. A. Teukolsky, “Perturbations of a rotating black
+hole. I. Fundamental equations for gravitational, electromagnetic,
+and neutrino-field perturbations,” *Astrophys. J.*
+**185**, 635–647 (1973). [https://doi.org/10.1086/152444](https://doi.org/10.1086/152444).
+
+<a id="ref-He"></a>
+
+**[He]** L. He, “The linear stability of weakly charged and
+slowly rotating Kerr–Newman family of charged black holes,”
+*Annals of PDE* **12**, 3 (2026).
+[https://doi.org/10.1007/s40818-025-00219-x](https://doi.org/10.1007/s40818-025-00219-x).
+
+<a id="ref-DGS"></a>
+
+**[DGS]** O. J. C. Dias, M. Godazgar, and J. E. Santos,
+“Linear mode stability of the Kerr–Newman black hole and its
+quasinormal modes,” *Phys. Rev. Lett.* **114**, 151101
+(2015). [https://doi.org/10.1103/PhysRevLett.114.151101](https://doi.org/10.1103/PhysRevLett.114.151101).
+
+<a id="ref-DCH"></a>
+
+**[DCH]** K. Destounis, V. Cardoso, and P. Hintz,
+“The quasinormal modes of Kerr–Newman black holes: a separated approach,”
+arXiv:2610.07142 (2026). [https://arxiv.org/abs/2610.07142](https://arxiv.org/abs/2610.07142).
+
+<a id="ref-M"></a>
+
+**[M]** H. Motohashi, “Charge-regular formulation and radiative
+amplitudes of Kerr–Newman perturbations,” arXiv:2610.10529 (2026).
+[https://arxiv.org/abs/2610.10529](https://arxiv.org/abs/2610.10529).
+
+<a id="ref-Z"></a>
+
+**[Z]** J.-K. Zhao, “Exact algebraic separation of the
+gravitoelectromagnetic perturbations of Kerr–Newman–(anti-)de Sitter
+black holes,” arXiv:2610.22274 (2026).
+[https://arxiv.org/abs/2610.22274](https://arxiv.org/abs/2610.22274).

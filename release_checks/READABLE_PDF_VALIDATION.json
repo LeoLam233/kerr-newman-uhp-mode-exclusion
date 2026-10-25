@@ -1,0 +1,56 @@
+{
+  "status": "PASS",
+  "pdf_sha256": "3e19b2b061885a148aa460768e0ce0373912df5e292adba50f1efeba29b75edc",
+  "tex_sha256": "f60572a72e70beceb3d91a70f95b6cec9736902ef0dd0f49a431e0bec67129d3",
+  "pages": 20,
+  "compiler": "pdfTeX / TeX Live 2026; pdflatex -interaction=nonstopmode -halt-on-error",
+  "last_compile_exit_code": 0,
+  "final_passes": 3,
+  "undefined_references": false,
+  "layout_warnings": [],
+  "visual_review": {
+    "all_20_rendered_pages_inspected": true,
+    "toc_headers_page_numbers_references_and_formulas_inspected": true,
+    "clipping_overlap_or_missing_glyphs_observed": false,
+    "render_engine": "Poppler pdftoppm, 90 dpi",
+    "page_png_sha256": {
+      "latest-01.png": "615c0aa2af3252f0a1fd07c40f82df0d19cff4167fe94aa2cbea60a64b167efe",
+      "latest-02.png": "0f4a9cd81b1a31ad43d2d85d7f9c86afa9b512be96a0fb5ac6d032d16c90b964",
+      "latest-03.png": "5a4c71d466014ec64e25f1a0c8caeca4c7fe8b11fc379a7d79acbdafa2dc7de4",
+      "latest-04.png": "6e68e505faffc701d0ca2ace4d328a7c36b4c8c197094a9829de9c2462a6ab26",
+      "latest-05.png": "11dcd0cc5d8afb78b1c280e5af3a25b76cd6e071b741c2ec587d29a78fe6af1d",
+      "latest-06.png": "0de798d14afd7356cb1d203e72428f4381e9b117e294d045dd053f1c8038129e",
+      "latest-07.png": "fa537a4a2a8af922ab4a6186f9ced83916ad84e939bc66447ccd36ba48b236af",
+      "latest-08.png": "2b999228d509c097a6ce0dde45afdca487b118440a71963e201f7d557e7d930a",
+      "latest-09.png": "208d0eafea4b3d582bcaa99d9400d2147263b4a5e170687d2d16a0b118337e1e",
+      "latest-10.png": "dd6d7b894ab2d3080a6f0ea3616b73a123c96cff4ebca2f76dab677571b62e4f",
+      "latest-11.png": "804903dec10312d0b5bfeaa58624863f6a996a9c9dd5835dda840f15862bf3e2",
+      "latest-12.png": "d56c6c8950109e7f3c1f8d77cb40be374724974bda88de5eef2b328ffc6ebea7",
+      "latest-13.png": "bb7f64ae0f2eadeaf9d631f7f1ce36a7ab52e9cc285c022af89583f7b4a1f88d",
+      "latest-14.png": "e6d7617b3eb4591931d9655d389a1051872bc42d423833ca0c7df2fc6dad4cfc",
+      "latest-15.png": "4241081eed7065362987288f9cfbc2e6a3f3c2849e0211815dd82cc656b5a1c3",
+      "latest-16.png": "8b6bace3005736e2c4f19c945fd14bf2488de1b59fc8512f4c8f0da4e9071228",
+      "latest-17.png": "040a181d6dab043097e482b5b1e45918bcaf72adf6a986f69d2488888d1aa674",
+      "latest-18.png": "2e320a8fb6169315e3bbfa1fc30f6f1abac2c2f7e74219b70e75207ba92586c2",
+      "latest-19.png": "0917ab1f79ad92b73c87827baff1e84896e44320b73530bfc1e003022fb1af8e",
+      "latest-20.png": "698394b175c256a475508417af3145631366009b4ddbb95a68fee180764a2a6f"
+    }
+  },
+  "font_checks": {
+    "all_fonts_embedded": true,
+    "fonts": [
+      "/CCBHDR+txsym",
+      "/CXCJBM+TeXGyreTermesX-Italic",
+      "/FOMOFK+txmiaX",
+      "/HCXZAC+TeXGyreTermesX-Bold",
+      "/HUMVZM+txexs",
+      "/HXBXEB+NewTXMI7",
+      "/MJPRYW+NewTXMI5",
+      "/OEWOEQ+txsys",
+      "/YRFDEK+NewTXMI",
+      "/ZDSWMS+TeXGyreTermesX-Regular"
+    ]
+  },
+  "page_bound_checks": "All extracted glyph bounds stay inside page rectangles.",
+  "issues": []
+}

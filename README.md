@@ -2,6 +2,14 @@
 
 The accompanying paper develops an analytic upper-half-plane exclusion argument for the radiative linearized Einstein–Maxwell modes of strictly subextremal Kerr–Newman black holes. The Lean 4 project formalizes the complete exclusion chain from the **explicitly stated published physical necessary-data interface**, including the charged, nonseparated angular/PDE argument and the separate Kerr spin-reversal branch.
 
+## Start Here — Reader-Friendly Proof
+
+**[Read the complete proof online](C002_READABLE.md)** · **[Download the readable PDF](manuscript/C002_READABLE.pdf)** · [Readable TeX source](manuscript/C002_READABLE.tex)
+
+The readable edition presents the full C002 argument with a proof roadmap, clearer headings and transitions, and all original equations and derivations. The [proof-correspondence map](docs/C002_PROOF_CORRESPONDENCE.md) locates each substantive step in both editions.
+
+Alternative entry points: **[Original C002 manuscript](manuscript/C002_v1.0.pdf)** · **[Lean formalization](KN.lean)** · [Lean source modules](KN/).
+
 ## Contents
 
 - [`manuscript/C002_v1.0.pdf`](manuscript/C002_v1.0.pdf) — governing 11-page mathematical manuscript; TeX and Markdown counterparts are alongside it.
