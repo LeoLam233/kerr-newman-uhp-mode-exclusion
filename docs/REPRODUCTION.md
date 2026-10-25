@@ -15,6 +15,6 @@ The full Codex review archive is separate; the Pro reproduction ZIP is unavailab
 
 ## Publication verification on 25 October 2026
 
-The [native publication receipt](../release_checks/NATIVE_VERIFICATION.json) records the actual clean build, strict check, fresh kernel replay, all 30 corrected controls, independent diagnostic validation, and native import-failure probes. The complete path-redacted logs are supplied as the release asset named and checksummed in that receipt. Their exact native and published-copy hashes are distinguished.
+The [native publication receipt](../release_checks/NATIVE_VERIFICATION.json) records the actual clean build, strict check, fresh kernel replay, all 30 corrected controls, independent diagnostic validation, and native import-failure probes. The complete path-redacted log archive has been prepared with the filename and checksum in that receipt. Its attachment to a GitHub Release is a separate publication step; consult the receipt for the actual upload status. Their exact native and published-copy hashes are distinguished.
 
 The [native root types and axiom output](../release_checks/NATIVE_ROOT_TYPES_AND_AXIOMS.txt) was compared with the preserved successful Codex audit output. Recheck a new strict output with `python3 release_checks/compare_archived_roots.py path/to/strict.stdout.log`. The baseline archive hash is retained; the unavailable Pro archive is not reconstructed.

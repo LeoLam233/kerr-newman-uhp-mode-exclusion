@@ -554,7 +554,8 @@
     "filename": "KN_UHP_C002_NATIVE_PUBLICATION_RECEIPTS_20261025.zip",
     "sha256": "c672baf89fdf22eef4a7d582ce2df77d5c05a3a72d3e4b29df13939e7c47bb5e",
     "bytes": 5302304,
-    "local_paths_redacted": true
+    "local_paths_redacted": true,
+    "upload_status": "NOT_UPLOADED: browser file upload permission unavailable; Computer Use then stopped because the Windows browser URL could not be verified reliably."
   },
   "scientific_source_unchanged_after_native_gates": true,
   "archived_root_comparison": {
@@ -1045,5 +1046,6 @@
     "Portable native receipts, preserved archived baseline and comparison utility added.",
     "Coverage appendix accurately discloses the absent historical machine-readable coverage JSON.",
     "Reproduction documentation links these new receipts; no file in the 342-file scientific/source identity changed."
-  ]
+  ],
+  "tagged_release_status": "NOT_PUBLISHED: tag and release submission were not completed before Computer Use stopped."
 }
